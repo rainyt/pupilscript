@@ -18,8 +18,8 @@ class Move extends Script {
 
 	override function onUpdate() {
 		super.onUpdate();
-		this.display.x += x;
-		this.display.y += y;
+		// this.display.x += x;
+		// this.display.y += y;
 		exit();
 	}
 }

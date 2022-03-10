@@ -1,11 +1,10 @@
 package script.core;
 
-import script.display.DisplayObject;
-
 /**
  * 通用的基础Script脚本基础实现
  */
 class Script implements IScript {
+
 	public function new() {
 		scripts = [];
 	}
@@ -16,9 +15,13 @@ class Script implements IScript {
 
 	public var scripts:Array<IScript>;
 
-	public var display:DisplayObject;
+	public var display:Any;
 
 	public function onUpdate() {}
+
+	public function bindDisplay(display:Any) {
+		this.display = display;
+	}
 
 	public function exit(code:Int = 0):Void {
 		state = code;

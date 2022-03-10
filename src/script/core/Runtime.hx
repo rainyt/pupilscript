@@ -11,6 +11,9 @@ class Runtime {
 			runScript.onUpdate();
 			if (runScript.state == 0) {
 				script.scriptIndex++;
+				var runScript = script.scripts[script.scriptIndex];
+				if (runScript != null)
+					runScript.bindDisplay(runScript.display);
 				run(script);
 			}
 		}

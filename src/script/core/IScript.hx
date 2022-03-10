@@ -19,12 +19,18 @@ interface IScript {
 	/**
 	 * 控制对象
 	 */
-	public var display:DisplayObject;
+	public var display:Any;
 
 	/**
 	 * 脚本运行索引
 	 */
 	public var scriptIndex:Int;
+
+	/**
+	 * 绑定控制对象
+	 * @param display 
+	 */
+	public function bindDisplay(display:Any):Void;
 
 	/**
 	 * 当脚本开始时，将会不停更新这个接口

@@ -1,3 +1,4 @@
+import zygame.utils.FrameEngine;
 import script.core.Runtime;
 import script.core.Script;
 import script.core.IScript;
@@ -10,7 +11,15 @@ class Pupil extends Script {
 	 * 开始执行
 	 */
 	public function start():Void {
+		this.scriptIndex = 0;
+		this.scripts[0].bindDisplay(this.scripts[0].display);
+		#if zygame
+		FrameEngine.create(function(f) {
+			Runtime.run(this);
+		});
+		#else
 		Runtime.run(this);
+		#end
 	}
 
 	/**
