@@ -1,3 +1,4 @@
 --main Test
 --class-path src
+--class-path Test
 --run Test
