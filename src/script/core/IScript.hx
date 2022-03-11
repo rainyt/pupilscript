@@ -1,6 +1,5 @@
 package script.core;
 
-import script.display.DisplayObject;
 
 /**
  * 脚本接口实现

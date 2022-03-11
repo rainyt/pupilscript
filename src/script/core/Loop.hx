@@ -9,9 +9,14 @@ class Loop extends Script {
 	/**
 	 * 当前剩余循环
 	 */
-	public var loop(get, never):Int;
+	public var loop(get, set):Int;
 
 	private function get_loop():Int {
+		return _loop;
+	}
+
+	private function set_loop(i:Int):Int {
+		_loop = i;
 		return _loop;
 	}
 
@@ -30,7 +35,6 @@ class Loop extends Script {
 		if (code == RuntimeCode.EXIT || code == RuntimeCode.BREAK) {
 			this.exit();
 		} else if (code == RuntimeCode.LOOP_EXIT) {
-			this.scriptIndex = -1;
 			if (_loop > 0)
 				_loop--;
 			if (_loop == 0)

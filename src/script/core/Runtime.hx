@@ -6,8 +6,13 @@ class Runtime {
 	 * @param script 
 	 * @return Int 退出码
 	 */
-	public static function run(script:IScript):RuntimeCode {
+	public static function run(script:IScript, resetScript:Bool = true):RuntimeCode {
 		// 开始循序执行script
+		if (resetScript) {
+			if (script.scriptIndex >= script.scripts.length) {
+				script.scriptIndex = -1;
+			}
+		}
 		if (script.scriptIndex == -1) {
 			script.scriptIndex = 0;
 			script.scripts[0].reset(script.scripts[0].display);
@@ -22,7 +27,7 @@ class Runtime {
 				if (runScript != null) {
 					runScript.reset(runScript.display);
 				}
-				return run(script);
+				return run(script, false);
 			} else {
 				return runScript.state;
 			}
