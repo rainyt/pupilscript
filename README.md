@@ -3,6 +3,31 @@
 
 ## 自定义命令
 通过继承Script实现自定义的命令块，然后添加命令进行执行。
+```haxe
+/**
+ * 自定义命令
+ */
+class CustomScript extends Script {
+	private var _x:Float;
+
+	private var _y:Float;
+
+	public function new(x:Float, y:Float) {
+		super();
+		_x = x;
+		_y = y;
+	}
+
+	override function onUpdate() {
+		super.onUpdate();
+		trace("onUpdate");
+		var data:Dynamic = this.display;
+		data.x += _x;
+		data.y += _y;
+		exit();
+	}
+}
+```
 
 ## 使用
 ```haxe
