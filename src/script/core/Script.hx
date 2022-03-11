@@ -8,7 +8,10 @@ class Script implements IScript {
 		scripts = [];
 	}
 
-	public var state:Int = -1;
+	/**
+	 * 当前脚本运行的状态码
+	 */
+	public var state:RuntimeCode = RuntimeCode.RUNING;
 
 	public var scriptIndex:Int = -1;
 
@@ -19,11 +22,11 @@ class Script implements IScript {
 	public function onUpdate() {}
 
 	public function reset(display:Any) {
-		this.state = -1;
+		this.state = RuntimeCode.RUNING;
 		this.display = display;
 	}
 
-	public function exit(code:Int = 0):Void {
+	public function exit(code:RuntimeCode = RuntimeCode.RUNING):Void {
 		state = code;
 	}
 

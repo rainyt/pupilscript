@@ -9,7 +9,7 @@ interface IScript {
 	/**
 	 * 运行状态，-1为正常运行，0为正常结束，其他为错误
 	 */
-	public var state:Int;
+	public var state:RuntimeCode;
 
 	/**
 	 * 运行脚本逻辑列表
@@ -41,7 +41,7 @@ interface IScript {
 	 * 结束当前脚本的运行
 	 * @param code 0为正常
 	 */
-	public function exit(code:Int = 0):Void;
+	public function exit(code:RuntimeCode = RuntimeCode.RUNING):Void;
 
 	/**
 	 * 添加执行脚本
