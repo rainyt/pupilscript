@@ -6,7 +6,7 @@ class Runtime {
 	 * @param script 
 	 * @return Int 退出码
 	 */
-	public static function run(script:IScript):Int {
+	public static function run(script:IScript):RuntimeCode {
 		// 开始循序执行script
 		if (script.scriptIndex == -1) {
 			script.scriptIndex = 0;
@@ -16,22 +16,17 @@ class Runtime {
 			var runScript = script.scripts[script.scriptIndex];
 			runScript.onUpdate();
 			// 如果循序执行成功，则进入下一个
-			if (runScript.state == 0) {
+			if (runScript.state == RuntimeCode.EXIT) {
 				script.scriptIndex++;
-				if (script.scriptIndex >= script.scripts.length)
-					script.scriptIndex = -1;
-				else {
-					var runScript = script.scripts[script.scriptIndex];
-					if (runScript != null) {
-						runScript.reset(runScript.display);
-					}
+				var runScript = script.scripts[script.scriptIndex];
+				if (runScript != null) {
+					runScript.reset(runScript.display);
 				}
 				return run(script);
 			} else {
 				return runScript.state;
 			}
 		}
-		script.scriptIndex = -1;
 		return RuntimeCode.LOOP_EXIT;
 	};
 }

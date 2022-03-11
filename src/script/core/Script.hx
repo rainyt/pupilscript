@@ -49,7 +49,7 @@ class Script implements IScript {
 	 * 当脚本运行结束后，请求退出
 	 * @param code 
 	 */
-	public function exit(code:RuntimeCode = RuntimeCode.RUNING):Void {
+	public function exit(code:RuntimeCode = RuntimeCode.EXIT):Void {
 		state = code;
 	}
 
