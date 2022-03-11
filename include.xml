@@ -1,0 +1,4 @@
+<project>
+    <!-- OpenFL库 -->
+    <source path="openfl_lib" if="openfl"/>
+</project>

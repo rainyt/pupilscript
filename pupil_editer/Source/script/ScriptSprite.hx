@@ -3,8 +3,6 @@ package script;
 import openfl.text.TextFormat;
 import openfl.text.TextField;
 import script.core.IScript;
-import feathers.layout.VerticalAlign;
-import feathers.controls.Label;
 import openfl.display.Sprite;
 
 /**
@@ -23,6 +21,7 @@ class ScriptSprite extends Sprite {
 		label = new TextField();
 		label.selectable = false;
 		label.x = 5;
+		label.height = 20;
 		// label.verticalAlign = VerticalAlign.MIDDLE;
 	}
 

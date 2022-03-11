@@ -1,6 +1,9 @@
 --main Test
 --class-path src
 --class-path Test
+--class-path openfl_lib
 # --run Test
 --neko bin/main.n
 --cmd neko ./bin/main.n
+# openfl
+--library openfl

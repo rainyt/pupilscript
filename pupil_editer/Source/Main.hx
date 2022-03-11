@@ -1,5 +1,10 @@
 package;
 
+import pupil.Move;
+import openfl.text.TextField;
+import openfl.display.Sprite;
+import openfl.display.DisplayObject;
+import openfl.events.MouseEvent;
 import script.core.OneLoop;
 import script.core.If;
 import script.core.Loop;
@@ -29,11 +34,37 @@ class Main extends Application {
 		script.x = 400;
 		script.y = 400;
 
-		var obj = {x: 0, y: 0};
+		var quad = new Sprite();
+		this.addChild(quad);
+		quad.graphics.beginFill(0xffff00);
+		quad.graphics.drawRect(0, 0, 50, 50);
+		quad.x = 200;
+		quad.y = 200;
+
 		var pupil = new Pupil();
-		// pupil.addScript(obj,new Loop());
-		pupil.addScript(obj, new Loop().addScript(obj, new Loop().addScript(obj, new OneLoop()).addScript(obj, new OneLoop()).addScript(obj, new OneLoop())))
-			.addScript(obj, new If((data) -> true));
+		var loop = new Loop();
+		loop.addScript(quad, new Move(1, 100, 0));
+		loop.addScript(quad, new Move(1, -100, 0));
+		pupil.addScript(quad, loop);
+		pupil.start();
+		
 		script.draw(pupil);
+
+		stage.addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
+		stage.addEventListener(MouseEvent.MOUSE_UP, onMouseUp);
+	}
+
+	private function onMouseDown(e:MouseEvent):Void {
+		var display:DisplayObject = e.target;
+		if (Std.isOfType(display, TextField)) {
+			display = display.parent;
+		}
+		if (!Std.isOfType(display, Sprite))
+			return;
+		cast(display, Sprite).startDrag();
+	}
+
+	private function onMouseUp(e:MouseEvent):Void {
+		this.stopDrag();
 	}
 }
