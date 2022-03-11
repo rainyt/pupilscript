@@ -21,8 +21,11 @@ import feathers.controls.Application;
 class Main extends Application {
 	public static var leftMenu:LeftMenu;
 
+	public static var current:Main;
+
 	public function new() {
 		super();
+		current = this;
 		this.backgroundSkin = new RectangleSkin(SolidColor(0x252525));
 		this.layout = new AnchorLayout();
 		leftMenu = new LeftMenu();
@@ -44,27 +47,41 @@ class Main extends Application {
 		var pupil = new Pupil();
 		var loop = new Loop();
 		loop.addScript(quad, new Move(1, 100, 0));
-		loop.addScript(quad, new Move(1, -100, 0));
+		loop.addScript(quad, new Move(2, -100, 0));
+		var loop2 = new Loop();
+		loop.addScript(quad, loop2);
 		pupil.addScript(quad, loop);
 		pupil.start();
-		
+
 		script.draw(pupil);
 
 		stage.addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
+		stage.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
 		stage.addEventListener(MouseEvent.MOUSE_UP, onMouseUp);
 	}
 
+	private var _currentScriptSprite:ScriptSprite;
+
 	private function onMouseDown(e:MouseEvent):Void {
+		_currentScriptSprite = null;
 		var display:DisplayObject = e.target;
 		if (Std.isOfType(display, TextField)) {
 			display = display.parent;
 		}
-		if (!Std.isOfType(display, Sprite))
+		if (!Std.isOfType(display, ScriptSprite))
 			return;
-		cast(display, Sprite).startDrag();
+		_currentScriptSprite = cast display;
+		_currentScriptSprite.startDrag();
+	}
+
+	private function onMouseMove(e:MouseEvent):Void {
+		if (_currentScriptSprite == null)
+			return;
+		trace(_currentScriptSprite.x);
 	}
 
 	private function onMouseUp(e:MouseEvent):Void {
 		this.stopDrag();
+		_currentScriptSprite = null;
 	}
 }

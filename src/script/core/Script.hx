@@ -79,4 +79,9 @@ class Script implements IScript {
 	public var name:String;
 
 	public var desc:String;
+
+	/**
+	 * 是否支持子脚本
+	 */
+	public var supportChildScript:Bool = false;
 }

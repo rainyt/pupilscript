@@ -10,6 +10,12 @@ import script.core.Script;
  * 参考儿童编程，可以自定义组件，使组件按循序执行
  */
 class Pupil extends Script {
+
+	public function new() {
+		super();
+		this.supportChildScript = true;
+	}
+
 	/**
 	 * 当程序退出时
 	 * @param code 

@@ -15,6 +15,7 @@ class If extends Script {
 		super();
 		_iffunc = iffunc;
 		this.name = "判断";
+		this.supportChildScript = true;
 	}
 
 	override function onUpdate() {
