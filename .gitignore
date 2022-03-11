@@ -1,3 +1,5 @@
 
 .dev
 bin/main.n
+.DS_Store
+Export
