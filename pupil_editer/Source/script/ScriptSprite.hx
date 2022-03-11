@@ -33,6 +33,7 @@ class ScriptSprite extends Sprite {
 		if (script != null) {
 			draw(script);
 			if (parent != null && Std.isOfType(this.parent, ScriptSprite)) {
+				trace("cast");
 				cast(this.parent, ScriptSprite).resetDraw();
 			}
 		}
