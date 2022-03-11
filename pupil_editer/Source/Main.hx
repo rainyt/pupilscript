@@ -1,5 +1,6 @@
 package;
 
+import script.core.Break;
 import pupil.Move;
 import openfl.text.TextField;
 import openfl.display.Sprite;
@@ -49,6 +50,8 @@ class Main extends Application {
 		loop.addScript(quad, new Move(1, 100, 0));
 		loop.addScript(quad, new Move(2, -100, 0));
 		var loop2 = new Loop();
+		loop2.addScript(quad, new Move(1, 0, -100));
+		loop2.addScript(quad, new Break());
 		loop.addScript(quad, loop2);
 		pupil.addScript(quad, loop);
 		pupil.start();

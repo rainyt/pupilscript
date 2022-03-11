@@ -67,4 +67,14 @@ interface IScript {
 	 * 是否支持子脚本
 	 */
 	public var supportChildScript:Bool;
+
+	/**
+	 * 父节点的脚本
+	 */
+	public var parent:IScript;
+
+	/**
+	 * 自定义数据
+	 */
+	public var customData:Any;
 }

@@ -50,6 +50,7 @@ class Script implements IScript {
 	 * @param code 
 	 */
 	public function exit(code:RuntimeCode = RuntimeCode.EXIT):Void {
+		this.scriptIndex = -1;
 		state = code;
 	}
 
@@ -60,6 +61,9 @@ class Script implements IScript {
 	 * @return IScript
 	 */
 	public function addScript(display:Any, script:IScript):IScript {
+		if (script.parent != null)
+			script.parent.removeScript(script);
+		script.parent = this;
 		if (scripts.indexOf(script) == -1) {
 			script.display = display;
 			scripts.push(script);
@@ -73,6 +77,7 @@ class Script implements IScript {
 	 */
 	public function removeScript(script:IScript) {
 		script.display = null;
+		script.parent = null;
 		scripts.remove(script);
 	}
 
@@ -84,4 +89,11 @@ class Script implements IScript {
 	 * 是否支持子脚本
 	 */
 	public var supportChildScript:Bool = false;
+
+	/**
+	 * 父节点，如果是root节点，父亲是它自已
+	 */
+	public var parent:IScript;
+
+	public var customData:Any;
 }
