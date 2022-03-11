@@ -17,16 +17,30 @@ class Pupil extends Script {
 	dynamic public function onExit(code:Int):Void {}
 
 	/**
+	 * 是否停止
+	 */
+	private var _stop:Bool = false;
+
+	/**
+	 * 是否已开始
+	 */
+	private var _start:Bool = false;
+
+	/**
 	 * 开始执行
 	 */
 	public function start():Void {
-		if (this.scripts.length == 0)
+		if (this.scripts.length == 0 || _start)
 			return;
+		_start = true;
 		#if zygame
 		FrameEngine.create(function(f) {
 			var code = Runtime.run(this);
-			if (code == RuntimeCode.EXIT)
+			if (_stop || code == RuntimeCode.EXIT) {
 				f.stop();
+				_stop = false;
+				_start = false;
+			}
 		});
 		#else
 		_delayCall();
@@ -42,6 +56,8 @@ class Pupil extends Script {
 				if (exit == RuntimeCode.LOOP_EXIT)
 					exit = RuntimeCode.EXIT;
 				onExit(exit);
+				_stop = false;
+				_start = false;
 			}
 		}, 16);
 	}
@@ -49,5 +65,7 @@ class Pupil extends Script {
 	/**
 	 * 停止
 	 */
-	public function stop():Void {}
+	public function stop():Void {
+		_stop = true;
+	}
 }
