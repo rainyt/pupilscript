@@ -27,6 +27,7 @@ class Loop extends Script {
 	public function new(loop:Int = -1) {
 		super();
 		_loop = loop;
+		this.name = "循环执行";
 	}
 
 	override function onUpdate() {

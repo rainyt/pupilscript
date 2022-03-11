@@ -14,6 +14,7 @@ class If extends Script {
 	public function new(iffunc:Any->Bool) {
 		super();
 		_iffunc = iffunc;
+		this.name = "判断";
 	}
 
 	override function onUpdate() {

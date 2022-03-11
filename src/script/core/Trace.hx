@@ -6,6 +6,7 @@ class Trace extends Script {
 	public function new(msg:String) {
 		super();
 		_msg = msg;
+		this.name = "输出";
 	}
 
 	override function onUpdate() {

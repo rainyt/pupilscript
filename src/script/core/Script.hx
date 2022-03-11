@@ -75,4 +75,8 @@ class Script implements IScript {
 		script.display = null;
 		scripts.remove(script);
 	}
+
+	public var name:String;
+
+	public var desc:String;
 }

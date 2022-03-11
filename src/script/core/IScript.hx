@@ -1,6 +1,5 @@
 package script.core;
 
-
 /**
  * 脚本接口实现
  */
@@ -53,4 +52,14 @@ interface IScript {
 	 * @param script 
 	 */
 	public function removeScript(script:IScript):Void;
+
+	/**
+	 * 脚本名称
+	 */
+	public var name:String;
+
+	/**
+	 * 脚本描述
+	 */
+	public var desc:String;
 }
