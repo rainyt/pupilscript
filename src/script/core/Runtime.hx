@@ -10,7 +10,7 @@ class Runtime {
 		// 开始循序执行script
 		if (script.scriptIndex == -1) {
 			script.scriptIndex = 0;
-			script.scripts[0].bindDisplay(script.scripts[0].display);
+			script.scripts[0].reset(script.scripts[0].display);
 		}
 		if (script.scriptIndex < script.scripts.length) {
 			var runScript = script.scripts[script.scriptIndex];
@@ -23,7 +23,7 @@ class Runtime {
 				else {
 					var runScript = script.scripts[script.scriptIndex];
 					if (runScript != null) {
-						runScript.bindDisplay(runScript.display);
+						runScript.reset(runScript.display);
 					}
 				}
 				return run(script);

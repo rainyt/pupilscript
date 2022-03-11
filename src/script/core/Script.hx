@@ -18,7 +18,7 @@ class Script implements IScript {
 
 	public function onUpdate() {}
 
-	public function bindDisplay(display:Any) {
+	public function reset(display:Any) {
 		this.state = -1;
 		this.display = display;
 	}

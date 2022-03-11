@@ -30,7 +30,7 @@ interface IScript {
 	 * 绑定控制对象
 	 * @param display 
 	 */
-	public function bindDisplay(display:Any):Void;
+	public function reset(display:Any):Void;
 
 	/**
 	 * 当脚本开始时，将会不停更新这个接口
