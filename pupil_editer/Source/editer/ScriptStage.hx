@@ -47,7 +47,7 @@ class ScriptStage extends LayoutGroup {
 			pupil.addScript(quad, loop);
 			// pupil.start();
 
-			scripts.push(pupil);
+			parserScript(pupil);
 
 			script.draw(pupil);
 
@@ -55,6 +55,17 @@ class ScriptStage extends LayoutGroup {
 			stage.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
 			stage.addEventListener(MouseEvent.MOUSE_UP, onMouseUp);
 		});
+	}
+
+	public function parserScript(script:IScript):Void {
+		if (scripts.indexOf(script) == -1) {
+			scripts.push(script);
+		}
+		for (s in script.scripts) {
+			if (scripts.indexOf(s) == -1) {
+				scripts.push(s);
+			}
+		}
 	}
 
 	private var _currentScriptSprite:ScriptSprite;
@@ -84,13 +95,14 @@ class ScriptStage extends LayoutGroup {
 				if (Std.isOfType(_currentScriptSprite.parent, ScriptSprite))
 					cast(_currentScriptSprite.parent, ScriptSprite).resetDraw();
 				Main.scriptStage.addChild(_currentScriptSprite);
-				scripts.push(_currentScriptSprite.script);
 			} else {
 				// 组装逻辑
 				_readyAddScriptSprite = null;
 				for (script in scripts) {
 					var spriteScript:ScriptSprite = script.customData;
-					if (spriteScript != _currentScriptSprite && Math.abs(spriteScript.x - _currentScriptSprite.x) < 32) {
+					if (spriteScript.script.supportChildScript
+						&& spriteScript != _currentScriptSprite
+						&& Math.abs(spriteScript.x - _currentScriptSprite.x) < 32) {
 						_readyAddScriptSprite = spriteScript;
 						break;
 					}
@@ -104,8 +116,7 @@ class ScriptStage extends LayoutGroup {
 		if (_currentScriptSprite != null && _readyAddScriptSprite != null) {
 			_readyAddScriptSprite.script.addScript(_currentScriptSprite.script.display, _currentScriptSprite.script);
 			_readyAddScriptSprite.resetDraw();
-			scripts.remove(_currentScriptSprite.script);
-		} else {
+		} else if (_currentScriptSprite != null) {
 			_currentScriptSprite.resetDraw();
 		}
 		_readyAddScriptSprite = null;

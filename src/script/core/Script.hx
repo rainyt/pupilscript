@@ -61,7 +61,7 @@ class Script implements IScript {
 	 * @return IScript
 	 */
 	public function addScript(display:Any, script:IScript):IScript {
-		addScriptAt(display, script, scripts.length - 1);
+		addScriptAt(display, script, scripts.length);
 		return this;
 	}
 
