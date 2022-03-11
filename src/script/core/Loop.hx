@@ -34,7 +34,6 @@ class Loop extends Script {
 	override function onUpdate() {
 		super.onUpdate();
 		var code = Runtime.run(this);
-		trace("code=", code);
 		if (code == RuntimeCode.EXIT || code == RuntimeCode.BREAK) {
 			this.exit();
 		} else if (code == RuntimeCode.LOOP_EXIT) {

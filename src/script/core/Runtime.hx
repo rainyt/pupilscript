@@ -15,7 +15,8 @@ class Runtime {
 		}
 		if (script.scriptIndex == -1) {
 			script.scriptIndex = 0;
-			script.scripts[0].reset(script.scripts[0].display);
+			if (script.scripts[0] != null)
+				script.scripts[0].reset(script.scripts[0].display);
 		}
 		if (script.scriptIndex < script.scripts.length) {
 			var runScript = script.scripts[script.scriptIndex];

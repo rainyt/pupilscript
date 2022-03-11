@@ -77,4 +77,5 @@ interface IScript {
 	 * 自定义数据
 	 */
 	public var customData:Any;
+
 }

@@ -96,4 +96,5 @@ class Script implements IScript {
 	public var parent:IScript;
 
 	public var customData:Any;
+
 }
