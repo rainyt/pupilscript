@@ -7,6 +7,15 @@ class Loop extends Script {
 	private var _loop:Int = -1;
 
 	/**
+	 * 当前剩余循环
+	 */
+	public var loop(get, never):Int;
+
+	private function get_loop():Int {
+		return _loop;
+	}
+
+	/**
 	 * 构造一个循环结构
 	 * @param loop 循环次数，默认-1为一直循环
 	 */
