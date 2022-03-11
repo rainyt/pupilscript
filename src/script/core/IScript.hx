@@ -47,7 +47,7 @@ interface IScript {
 	 * 添加执行脚本
 	 * @param script 
 	 */
-	public function addScript(display:Any, script:IScript):Void;
+	public function addScript(display:Any, script:IScript):IScript;
 
 	/**
 	 * 删除执行脚本

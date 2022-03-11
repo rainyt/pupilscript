@@ -4,7 +4,6 @@ package script.core;
  * 通用的基础Script脚本基础实现
  */
 class Script implements IScript {
-
 	public function new() {
 		scripts = [];
 	}
@@ -27,11 +26,12 @@ class Script implements IScript {
 		state = code;
 	}
 
-	public function addScript(display:Any, script:IScript) {
+	public function addScript(display:Any, script:IScript):IScript {
 		if (scripts.indexOf(script) == -1) {
 			script.display = display;
 			scripts.push(script);
 		}
+		return this;
 	}
 
 	public function removeScript(script:IScript) {

@@ -1,3 +1,5 @@
+import script.core.Break;
+import script.core.Loop;
 import script.core.Script;
 
 class Test {
@@ -8,14 +10,16 @@ class Test {
 			x: 0,
 			y: 0
 		};
-        // 添加命令执行循序
+		// 添加命令执行循序
+		pupil.addScript(obj, new Loop().addScript(obj, new CustomScript(1, 5)).addScript(obj, new Break()));
 		pupil.addScript(obj, new CustomScript(10, 10));
 		pupil.addScript(obj, new CustomScript(20, 20));
 		pupil.addScript(obj, new CustomScript(-20, 10));
-        // 开始
+		// 开始
 		pupil.start();
-		trace(pupil);
-		trace("运行结果：", obj);
+		pupil.onExit = function(code) {
+			trace("运行结果：", code, obj);
+		}
 	}
 }
 
@@ -35,6 +39,7 @@ class CustomScript extends Script {
 
 	override function onUpdate() {
 		super.onUpdate();
+		trace("onUpdate");
 		var data:Dynamic = this.display;
 		data.x += _x;
 		data.y += _y;
