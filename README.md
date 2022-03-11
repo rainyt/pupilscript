@@ -24,6 +24,7 @@ class CustomScript extends Script {
 		var data:Dynamic = this.display;
 		data.x += _x;
 		data.y += _y;
+        // 当你认为这个脚本已经运行结束了，则运行exit()结束该脚本，如果不调用此方法，onUpdate会不停执行，直到exit()
 		exit();
 	}
 }
