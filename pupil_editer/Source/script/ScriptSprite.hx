@@ -1,5 +1,12 @@
 package script;
 
+import feathers.controls.TextInput;
+import feathers.controls.TextArea;
+import openfl.events.Event;
+import feathers.layout.VerticalAlign;
+import feathers.controls.Label;
+import feathers.layout.HorizontalLayout;
+import feathers.controls.LayoutGroup;
 import openfl.geom.Point;
 import openfl.text.TextFormat;
 import openfl.text.TextField;
@@ -9,8 +16,10 @@ import openfl.display.Sprite;
 /**
  * 脚本精灵
  */
-class ScriptSprite extends Sprite {
+class ScriptSprite extends LayoutGroup {
 	public static var point:Point = new Point();
+
+	public var layoutGroup:LayoutGroup;
 
 	public var label:TextField;
 
@@ -27,7 +36,15 @@ class ScriptSprite extends Sprite {
 		label.selectable = false;
 		label.x = 5;
 		label.height = 20;
-		// label.verticalAlign = VerticalAlign.MIDDLE;
+
+		layoutGroup = new LayoutGroup();
+		this.addChild(layoutGroup);
+		layoutGroup.layout = new HorizontalLayout();
+		cast(layoutGroup.layout, HorizontalLayout).verticalAlign = VerticalAlign.MIDDLE;
+		layoutGroup.width = 200;
+		layoutGroup.height = 36;
+		cast(layoutGroup.layout, HorizontalLayout).paddingLeft = 5;
+		cast(layoutGroup.layout, HorizontalLayout).paddingRight = 5;
 	}
 
 	public var scriptHeight:Float = 0;
@@ -43,14 +60,40 @@ class ScriptSprite extends Sprite {
 
 	public function draw(script:IScript):Void {
 		this.script = script;
-		script.customData = this;
+
 		this.removeChildren();
-		label.text = script.name == null ? Type.getClassName(Type.getClass(script)) : script.name;
-		label.setTextFormat(new TextFormat(null, 14));
-		label.y = (32 - label.textHeight) / 2;
-		this.addChild(label);
+
+		layoutGroup.removeChildren();
+		if (script.desc != null) {
+			// layoutGroup.addChild(new Label("???"));
+			for (index => value in script.desc) {
+				if (Std.isOfType(value, String))
+					layoutGroup.addChild(new Label(value));
+				else {
+					switch (value.type) {
+						case "input":
+							var input = new TextInput();
+							input.width = 50;
+							layoutGroup.addChild(input);
+							layoutGroup.width = 280;
+					}
+				}
+			}
+		} else {
+			var pname = script.name == null ? Type.getClassName(Type.getClass(script)) : script.name;
+			layoutGroup.addChild(new Label(pname));
+		}
+		this.addChild(layoutGroup);
+
+		trace(layoutGroup.getBounds(null));
+
+		script.customData = this;
+		// label.text =
+		// label.setTextFormat(new TextFormat(null, 14));
+		// label.y = (32 - label.textHeight) / 2;
+		// this.addChild(label);
 		var itemHeight = 36;
-		var itemWidth = label.textWidth + 20;
+		var itemWidth = layoutGroup.width + 20;
 		var bottomHeight = 16;
 		var offestX:Float = bottomHeight;
 		var offestY:Float = itemHeight;

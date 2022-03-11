@@ -95,7 +95,7 @@ class Script implements IScript {
 
 	public var name:String;
 
-	public var desc:String;
+	public var desc:Array<Dynamic>;
 
 	/**
 	 * 是否支持子脚本

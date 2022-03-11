@@ -28,6 +28,23 @@ class Move extends Script {
 	public function new(time:Float, x:Float, y:Float) {
 		super();
 		this.name = "移动";
+		this.desc = [
+			{
+				type: "input",
+				name: "time"
+			},
+			"秒内移动",
+			"X轴",
+			{
+				type: "input",
+				name: "x"
+			},
+			"Y轴",
+			{
+				type: "input",
+				name: "x"
+			}
+		];
 		_time = time;
 		_x = x;
 		_y = y;

@@ -73,7 +73,13 @@ class ScriptStage extends LayoutGroup {
 	private function onMouseDown(e:MouseEvent):Void {
 		_currentScriptSprite = null;
 		var display:DisplayObject = e.target;
-		if (Std.isOfType(display, TextField)) {
+		if (!Std.isOfType(display, ScriptSprite)) {
+			display = display.parent;
+		}
+		if (!Std.isOfType(display, ScriptSprite)) {
+			display = display.parent;
+		}
+		if (!Std.isOfType(display, ScriptSprite)) {
 			display = display.parent;
 		}
 		if (!Std.isOfType(display, ScriptSprite))
