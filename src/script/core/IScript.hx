@@ -48,6 +48,14 @@ interface IScript {
 	public function addScript(display:Any, script:IScript):IScript;
 
 	/**
+	 * 添加执行脚本
+	 * @param display
+	 * @param script 
+	 * @param index
+	 */
+	public function addScriptAt(display:Any, script:IScript, index:Int):IScript;
+
+	/**
 	 * 删除执行脚本
 	 * @param script 
 	 */
@@ -77,5 +85,4 @@ interface IScript {
 	 * 自定义数据
 	 */
 	public var customData:Any;
-
 }

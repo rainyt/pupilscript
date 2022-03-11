@@ -61,12 +61,24 @@ class Script implements IScript {
 	 * @return IScript
 	 */
 	public function addScript(display:Any, script:IScript):IScript {
+		addScriptAt(display, script, scripts.length - 1);
+		return this;
+	}
+
+	/**
+	 * 根据索引添加脚本
+	 * @param display 
+	 * @param script 
+	 * @param index 
+	 * @return IScript
+	 */
+	public function addScriptAt(display:Any, script:IScript, index:Int):IScript {
 		if (script.parent != null)
 			script.parent.removeScript(script);
 		script.parent = this;
 		if (scripts.indexOf(script) == -1) {
 			script.display = display;
-			scripts.push(script);
+			scripts.insert(index, script);
 		}
 		return this;
 	}
@@ -96,5 +108,4 @@ class Script implements IScript {
 	public var parent:IScript;
 
 	public var customData:Any;
-
 }

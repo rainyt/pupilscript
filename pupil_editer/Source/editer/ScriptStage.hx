@@ -69,7 +69,6 @@ class ScriptStage extends LayoutGroup {
 		}
 		if (!Std.isOfType(display, ScriptSprite))
 			return;
-		trace("cast");
 		_currentScriptSprite = cast display;
 		_currentScriptSprite.startDrag();
 		_currentScriptSprite.parent.setChildIndex(_currentScriptSprite, _currentScriptSprite.parent.numChildren);
