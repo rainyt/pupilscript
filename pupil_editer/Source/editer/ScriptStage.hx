@@ -45,7 +45,7 @@ class ScriptStage extends LayoutGroup {
 			loop2.addScript(quad, new Break());
 			loop.addScript(quad, loop2);
 			pupil.addScript(quad, loop);
-			// pupil.start();
+			pupil.start();
 
 			parserScript(pupil);
 
@@ -62,9 +62,7 @@ class ScriptStage extends LayoutGroup {
 			scripts.push(script);
 		}
 		for (s in script.scripts) {
-			if (scripts.indexOf(s) == -1) {
-				scripts.push(s);
-			}
+			parserScript(s);
 		}
 	}
 
@@ -89,7 +87,9 @@ class ScriptStage extends LayoutGroup {
 		if (_currentScriptSprite == null)
 			return;
 		if (!Std.isOfType(_currentScriptSprite.script, Pupil)) {
-			if (Math.abs(_currentScriptSprite.x) > 32 && _currentScriptSprite.script.parent != null) {
+			if (Std.isOfType(_currentScriptSprite.parent, ScriptSprite)
+				&& !cast(_currentScriptSprite.parent, ScriptSprite).test(_currentScriptSprite)
+					&& _currentScriptSprite.script.parent != null) {
 				// 拆解逻辑
 				_currentScriptSprite.script.parent.removeScript(_currentScriptSprite.script);
 				if (Std.isOfType(_currentScriptSprite.parent, ScriptSprite))
@@ -102,7 +102,7 @@ class ScriptStage extends LayoutGroup {
 					var spriteScript:ScriptSprite = script.customData;
 					if (spriteScript.script.supportChildScript
 						&& spriteScript != _currentScriptSprite
-						&& Math.abs(spriteScript.x - _currentScriptSprite.x) < 32) {
+						&& spriteScript.test(_currentScriptSprite)) {
 						_readyAddScriptSprite = spriteScript;
 						break;
 					}
@@ -114,7 +114,9 @@ class ScriptStage extends LayoutGroup {
 	private function onMouseUp(e:MouseEvent):Void {
 		this.stopDrag();
 		if (_currentScriptSprite != null && _readyAddScriptSprite != null) {
-			_readyAddScriptSprite.script.addScript(_currentScriptSprite.script.display, _currentScriptSprite.script);
+			var hitIndex = _readyAddScriptSprite.getAddScriptIndex(_currentScriptSprite);
+			trace("添加到：", hitIndex);
+			_readyAddScriptSprite.script.addScriptAt(_currentScriptSprite.script.display, _currentScriptSprite.script, hitIndex);
 			_readyAddScriptSprite.resetDraw();
 		} else if (_currentScriptSprite != null) {
 			_currentScriptSprite.resetDraw();

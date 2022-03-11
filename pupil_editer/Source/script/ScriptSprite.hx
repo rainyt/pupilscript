@@ -1,5 +1,6 @@
 package script;
 
+import openfl.geom.Point;
 import openfl.text.TextFormat;
 import openfl.text.TextField;
 import script.core.IScript;
@@ -9,6 +10,8 @@ import openfl.display.Sprite;
  * 脚本精灵
  */
 class ScriptSprite extends Sprite {
+	public static var point:Point = new Point();
+
 	public var label:TextField;
 
 	public var type:ScriptType;
@@ -75,6 +78,37 @@ class ScriptSprite extends Sprite {
 			this.graphics.drawRoundRectComplex(0, offestY, itemWidth * 3 / 4, bottomHeight, 0, bottomHeight / 2, 0, bottomHeight / 2);
 			scriptHeight += bottomHeight;
 		}
+	}
+
+	/**
+	 * 获取添加的索引位置
+	 * @return Int
+	 */
+	public function getAddScriptIndex(sprite:ScriptSprite):Int {
+		point.x = this.x;
+		point.y = this.y;
+		point = this.parent.localToGlobal(point);
+		point = Main.scriptStage.globalToLocal(point);
+		var index = 0;
+		for (i => s in script.scripts) {
+			var display = cast(s.customData, ScriptSprite);
+			trace(sprite.y, point.y + display.y + display.scriptHeight / 2);
+			if (sprite.y > point.y + display.y + display.scriptHeight / 2) {
+				index = i + 1;
+			}
+		}
+		return index;
+	}
+
+	public function test(sprite:ScriptSprite):Bool {
+		point.x = this.x;
+		point.y = this.y;
+		point = this.parent.localToGlobal(point);
+		point = Main.scriptStage.globalToLocal(point);
+		if (Math.abs(point.x - sprite.x) < 32 && sprite.y > point.y && sprite.y < point.y + this.scriptHeight) {
+			return true;
+		}
+		return false;
 	}
 }
 
