@@ -22,11 +22,11 @@ class Pupil extends Script {
 	public function start():Void {
 		if (this.scripts.length == 0)
 			return;
-		this.scriptIndex = 0;
-		this.scripts[0].bindDisplay(this.scripts[0].display);
 		#if zygame
 		FrameEngine.create(function(f) {
-			Runtime.run(this);
+			var code = Runtime.run(this);
+			if (code == RuntimeCode.EXIT)
+				f.stop();
 		});
 		#else
 		_delayCall();

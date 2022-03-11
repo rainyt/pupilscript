@@ -10,7 +10,7 @@ class Script implements IScript {
 
 	public var state:Int = -1;
 
-	public var scriptIndex:Int = 0;
+	public var scriptIndex:Int = -1;
 
 	public var scripts:Array<IScript>;
 
@@ -19,6 +19,7 @@ class Script implements IScript {
 	public function onUpdate() {}
 
 	public function bindDisplay(display:Any) {
+		this.state = -1;
 		this.display = display;
 	}
 

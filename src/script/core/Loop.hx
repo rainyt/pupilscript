@@ -8,9 +8,9 @@ class Loop extends Script {
 		super.onUpdate();
 		var code = Runtime.run(this);
 		if (code == RuntimeCode.EXIT || code == RuntimeCode.BREAK) {
-			trace("loop exit");
 			this.exit();
-		} else if (code == RuntimeCode.LOOP_EXIT) {}
-		trace("loop");
+		} else if (code == RuntimeCode.LOOP_EXIT) {
+			onUpdate();
+		}
 	}
 }
