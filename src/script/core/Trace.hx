@@ -1,19 +1,20 @@
 package script.core;
 
 class Trace extends Script {
-	private var _msg:String;
+	public var msg:String;
 
 	public function new(msg:String) {
 		super();
-		_msg = msg;
+		this.msg = msg;
 		this.name = "输出";
 		this.color = TRACE_VIOLET;
 		this.needDisplay = false;
+		this.desc = [TEXT("输出"), INPUT("msg", 0)];
 	}
 
 	override function onUpdate() {
 		super.onUpdate();
-		trace("pupilscript:" + _msg);
+		trace("pupilscript:" + msg);
 		this.exit();
 	}
 }

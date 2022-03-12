@@ -50,7 +50,7 @@ class ScriptSprite extends LayoutGroup {
 		cast(layoutGroup.layout, HorizontalLayout).paddingLeft = 5;
 		cast(layoutGroup.layout, HorizontalLayout).paddingRight = 5;
 		layoutGroup.addEventListener(Event.RESIZE, function(e) {
-			draw(script);
+			draw(script, false);
 		});
 	}
 
@@ -67,14 +67,17 @@ class ScriptSprite extends LayoutGroup {
 
 	private function bindTextInputChange(textInput:TextInput, key:String):Void {
 		textInput.addEventListener(Event.CHANGE, function(e) {
-			Reflect.setProperty(script, key, Std.parseFloat(textInput.text));
+			var data:Dynamic = Reflect.getProperty(script, key);
+			if (Std.isOfType(data, String))
+				Reflect.setProperty(script, key, textInput.text);
+			else
+				Reflect.setProperty(script, key, Std.parseFloat(textInput.text));
 		});
 		textInput.text = Std.string(Reflect.getProperty(script, key));
 	}
 
 	private function bindButtonClick(button:Button, cb:Void->Void):Void {
 		button.addEventListener(MouseEvent.CLICK, function(e) {
-			trace("执行");
 			cb();
 		});
 	}
@@ -86,10 +89,11 @@ class ScriptSprite extends LayoutGroup {
 		});
 	}
 
-	public function draw(script:IScript):Void {
+	public function draw(script:IScript, clean:Bool = true):Void {
 		this.script = script;
 
-		this.removeChildren();
+		if (clean)
+			this.removeChildren();
 
 		if (layoutGroup.numChildren == 0) {
 			if (script.desc != null) {
@@ -106,7 +110,11 @@ class ScriptSprite extends LayoutGroup {
 						// label.textFormat = new TextFormat(null, 14, 0xffffff);
 						case INPUT(key, width):
 							var input = new TextInput();
-							input.width = width;
+							if (width != 0)
+								input.width = width;
+							else {
+								input.autoSizeWidth = true;
+							}
 							layoutGroup.addChild(input);
 							bindTextInputChange(input, key);
 						case DEBUG(text, cb):
@@ -120,7 +128,8 @@ class ScriptSprite extends LayoutGroup {
 				layoutGroup.addChild(new Label(pname));
 			}
 		}
-		this.addChild(layoutGroup);
+		if (clean)
+			this.addChild(layoutGroup);
 		script.customData = this;
 		var itemHeight = 36;
 		var itemWidth = layoutGroup.width + 10;
@@ -140,8 +149,10 @@ class ScriptSprite extends LayoutGroup {
 			} else
 				for (s in script.scripts) {
 					var newSprite:ScriptSprite = s.customData == null ? new ScriptSprite(NONE) : s.customData;
-					this.addChild(newSprite);
-					newSprite.draw(s);
+					if (clean) {
+						this.addChild(newSprite);
+						newSprite.draw(s);
+					}
 					newSprite.x = offestX;
 					newSprite.y = offestY;
 					offestY += newSprite.scriptHeight;
@@ -166,7 +177,6 @@ class ScriptSprite extends LayoutGroup {
 		var lineY:Float = 36;
 		for (i => s in script.scripts) {
 			var display = cast(s.customData, ScriptSprite);
-			trace(sprite.y, point.y + display.y + display.scriptHeight / 2);
 			if (sprite.y > point.y + display.y + display.scriptHeight / 2) {
 				index = i + 1;
 				lineY = display.y + display.scriptHeight;

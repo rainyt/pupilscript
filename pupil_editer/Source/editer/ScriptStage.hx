@@ -1,5 +1,6 @@
 package editer;
 
+import script.core.Trace;
 import feathers.data.ArrayCollection;
 import feathers.controls.PopUpListView;
 import feathers.controls.TextInput;
@@ -65,6 +66,7 @@ class ScriptStage extends LayoutGroup {
 			loop2.addScript(new Move(1, 0, -100), quad);
 			loop2.addScript(new Break());
 			loop.addScript(loop2);
+			loop.addScript(new Trace("大家好，我是输出！"));
 			pupil.addScript(loop);
 			// pupil.start();
 
