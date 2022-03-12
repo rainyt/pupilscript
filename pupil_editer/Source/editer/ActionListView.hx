@@ -2,7 +2,6 @@ package editer;
 
 import openfl.events.FocusEvent;
 import feathers.skins.RectangleSkin;
-import feathers.controls.LayoutGroup;
 import feathers.data.ListViewItemState;
 import script.core.IScript;
 import feathers.data.ArrayCollection;

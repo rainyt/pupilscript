@@ -46,6 +46,8 @@ class Move extends Script {
 	override function reset(display:Any) {
 		super.reset(display);
 		var obj:DisplayObject = display;
+		if (obj == null)
+			return;
 		_rootX = obj.x;
 		_rootY = obj.y;
 		_curTime = 0;
@@ -57,6 +59,10 @@ class Move extends Script {
 		if (_curTime > this.time)
 			_curTime = this.time;
 		var obj:DisplayObject = display;
+		if (obj == null) {
+			exit();
+			return;
+		}
 		obj.x = _rootX + this.x * _curTime / this.time;
 		obj.y = _rootY + this.y * _curTime / this.time;
 		if (_curTime == this.time) {

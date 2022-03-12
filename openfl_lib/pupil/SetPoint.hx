@@ -17,11 +17,16 @@ class SetPoint extends Script {
 		this.y = y;
 		this.desc = [TEXT("设置"), TEXT("X轴"), INPUT("x", 100), TEXT("Y轴"), INPUT("y", 100)];
 		this.color = MOTION_RED;
+		this.needDisplay = true;
 	}
 
 	override function onUpdate() {
 		super.onUpdate();
 		var obj:DisplayObject = this.display;
+		if (obj == null) {
+			exit();
+			return;
+		}
 		obj.x = x;
 		obj.y = y;
 		exit();

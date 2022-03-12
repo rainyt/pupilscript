@@ -103,6 +103,7 @@ class ScriptSprite extends LayoutGroup {
 			if (script.desc != null) {
 				if (script.needDisplay) {
 					var drop = new PopUpListView(Main.scriptStage.array);
+					drop.selectedItem = script.display;
 					layoutGroup.addChild(drop);
 					bindPopUpListView(drop);
 				}

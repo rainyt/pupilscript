@@ -154,7 +154,7 @@ class ScriptStage extends LayoutGroup {
 						&& spriteScript != _currentScriptSprite
 						&& spriteScript.test(_currentScriptSprite)) {
 						_readyAddScriptSprite = spriteScript;
-						var hitIndex = _readyAddScriptSprite.getAddScriptIndex(_currentScriptSprite);
+						_readyAddScriptSprite.getAddScriptIndex(_currentScriptSprite);
 						break;
 					}
 				}
