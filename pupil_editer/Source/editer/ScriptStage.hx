@@ -8,6 +8,7 @@ import openfl.text.TextField;
 import openfl.display.DisplayObject;
 import openfl.events.MouseEvent;
 import script.core.Break;
+import script.core.Aync;
 import pupil.Move;
 import pupil.SetPoint;
 import script.core.Loop;
@@ -24,7 +25,7 @@ class ScriptStage extends LayoutGroup {
 	 * 脚本管理
 	 */
 	public var scripts:Array<IScript> = [];
-    
+
 	public var array:ArrayCollection<DisplayObject> = new ArrayCollection();
 
 	public function new() {
@@ -57,7 +58,7 @@ class ScriptStage extends LayoutGroup {
 
 			var pupil = new Pupil();
 			pupil.addScript(new SetPoint(200, 200), quad);
-			var loop = new Loop();
+			var loop = new Aync();
 			loop.addScript(new Move(1, 100, 0), quad);
 			loop.addScript(new Move(2, -100, 0), quad);
 			var loop2 = new Loop();

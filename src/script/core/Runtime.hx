@@ -18,7 +18,7 @@ class Runtime {
 			if (script.scripts[0] != null)
 				script.scripts[0].reset(script.scripts[0].display);
 		}
-		if (script.scriptIndex < script.scripts.length) {
+		if (script.supportRunChildScript && script.scriptIndex < script.scripts.length) {
 			var runScript = script.scripts[script.scriptIndex];
 			runScript.onUpdate();
 			// 如果循序执行成功，则进入下一个

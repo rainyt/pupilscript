@@ -114,4 +114,9 @@ class Script implements IScript {
 	 * 命令模块颜色分类
 	 */
 	public var color:Color = NONE;
+
+	/**
+	 * 是否支持运行子脚本
+	 */
+	public var supportRunChildScript:Bool = true;
 }

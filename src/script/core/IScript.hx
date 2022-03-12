@@ -82,6 +82,11 @@ interface IScript {
 	public var supportChildScript:Bool;
 
 	/**
+	 * 是否支持运行子脚本
+	 */
+	public var supportRunChildScript:Bool;
+
+	/**
 	 * 父节点的脚本
 	 */
 	public var parent:IScript;
