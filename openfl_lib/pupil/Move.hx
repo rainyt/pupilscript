@@ -7,11 +7,11 @@ import script.core.Script;
  * 移动命令
  */
 class Move extends Script {
-	private var _time:Float = 0;
+	public var time:Float = 0;
 
-	private var _x:Float = 0;
+	public var x:Float = 0;
 
-	private var _y:Float = 0;
+	public var y:Float = 0;
 
 	private var _rootX:Float = 0;
 
@@ -42,12 +42,12 @@ class Move extends Script {
 			"Y轴",
 			{
 				type: "input",
-				name: "x"
+				name: "y"
 			}
 		];
-		_time = time;
-		_x = x;
-		_y = y;
+		this.time = time;
+		this.x = x;
+		this.y = y;
 		this.color = MOTION_RED;
 	}
 
@@ -62,12 +62,12 @@ class Move extends Script {
 	override function onUpdate() {
 		super.onUpdate();
 		_curTime += 1 / 60;
-		if (_curTime > _time)
-			_curTime = _time;
+		if (_curTime > this.time)
+			_curTime = this.time;
 		var obj:DisplayObject = display;
-		obj.x = _rootX + _x * _curTime / _time;
-		obj.y = _rootY + _y * _curTime / _time;
-		if (_curTime == _time) {
+		obj.x = _rootX + this.x * _curTime / this.time;
+		obj.y = _rootY + this.y * _curTime / this.time;
+		if (_curTime == this.time) {
 			exit();
 		}
 	}

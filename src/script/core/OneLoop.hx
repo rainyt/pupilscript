@@ -7,6 +7,7 @@ class OneLoop extends Loop {
 	public function new() {
 		super(1);
 		this.name = "单次执行";
+		this.desc = null;
 	}
 
 	override function reset(display:Any) {

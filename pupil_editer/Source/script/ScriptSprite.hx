@@ -58,6 +58,13 @@ class ScriptSprite extends LayoutGroup {
 		}
 	}
 
+	private function bindTextInputChange(textInput:TextInput, value:Dynamic):Void {
+		textInput.addEventListener(Event.CHANGE, function(e) {
+			Reflect.setProperty(script, value.name, Std.parseFloat(textInput.text));
+		});
+		textInput.text = Std.string(Reflect.getProperty(script, value.name));
+	}
+
 	public function draw(script:IScript):Void {
 		this.script = script;
 
@@ -75,6 +82,7 @@ class ScriptSprite extends LayoutGroup {
 								input.width = 50;
 								layoutGroup.addChild(input);
 								layoutGroup.width = 280;
+								bindTextInputChange(input, value);
 						}
 					}
 				}
