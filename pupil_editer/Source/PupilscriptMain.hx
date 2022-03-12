@@ -1,5 +1,6 @@
 package;
 
+import feathers.controls.LayoutGroup;
 import pupil.SetPoint;
 import script.core.Trace;
 import script.core.Aync;
@@ -25,17 +26,19 @@ import feathers.controls.Application;
 /**
  * PupilScript可视化编辑器
  */
-class Main extends Application {
+class PupilscriptMain extends #if pupilediter LayoutGroup #else Application #end {
 	public static var leftMenu:ActionMenu;
 
-	public static var current:Main;
+	public static var current:PupilscriptMain;
 
 	public static var scriptStage:ScriptStage;
 
 	public function new() {
 		super();
 		current = this;
+		#if !pupilediter
 		this.backgroundSkin = new RectangleSkin(SolidColor(0x252525));
+		#end
 		this.layout = new AnchorLayout();
 		leftMenu = new ActionMenu();
 		this.addChild(leftMenu);

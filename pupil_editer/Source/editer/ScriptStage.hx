@@ -141,7 +141,7 @@ class ScriptStage extends LayoutGroup {
 				_currentScriptSprite.script.parent.removeScript(_currentScriptSprite.script, false);
 				if (Std.isOfType(_currentScriptSprite.parent, ScriptSprite))
 					cast(_currentScriptSprite.parent, ScriptSprite).resetDraw();
-				Main.scriptStage.addChild(_currentScriptSprite);
+				PupilscriptMain.scriptStage.addChild(_currentScriptSprite);
 			} else {
 				// 组装逻辑
 				_readyAddScriptSprite = null;

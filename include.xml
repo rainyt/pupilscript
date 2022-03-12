@@ -1,4 +1,10 @@
 <project>
     <!-- OpenFL库 -->
-    <source path="openfl_lib" if="openfl"/>
+    <source path="openfl_lib" if="openfl" />
+    <!-- 内置编辑器处理 -->
+    <source path="pupil_editer/Source" if="pupilediter" />
+    <!-- 使用UI库 -->
+    <haxelib name="feathersui" if="pupilediter" />
+    <!-- 编辑器标识 -->
+    <haxedef name="pupilediter" if="pupilediter"/>
 </project>

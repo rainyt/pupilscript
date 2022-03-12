@@ -102,7 +102,7 @@ class ScriptSprite extends LayoutGroup {
 		if (layoutGroup.numChildren == 0) {
 			if (script.desc != null) {
 				if (script.needDisplay) {
-					var drop = new PopUpListView(Main.scriptStage.array);
+					var drop = new PopUpListView(PupilscriptMain.scriptStage.array);
 					drop.selectedItem = script.display;
 					layoutGroup.addChild(drop);
 					bindPopUpListView(drop);
@@ -180,7 +180,7 @@ class ScriptSprite extends LayoutGroup {
 		point.x = this.x;
 		point.y = this.y;
 		point = this.parent.localToGlobal(point);
-		point = Main.scriptStage.globalToLocal(point);
+		point = PupilscriptMain.scriptStage.globalToLocal(point);
 		var index = 0;
 		var lineY:Float = 36;
 		for (i => s in script.scripts) {
@@ -192,7 +192,7 @@ class ScriptSprite extends LayoutGroup {
 		}
 		line.y = point.y + lineY;
 		line.x = 16 + point.x;
-		Main.scriptStage.addChild(line);
+		PupilscriptMain.scriptStage.addChild(line);
 		return index;
 	}
 
@@ -200,7 +200,7 @@ class ScriptSprite extends LayoutGroup {
 		point.x = this.x;
 		point.y = this.y;
 		point = this.parent.localToGlobal(point);
-		point = Main.scriptStage.globalToLocal(point);
+		point = PupilscriptMain.scriptStage.globalToLocal(point);
 		if (Math.abs(point.x - sprite.x) < 32 && sprite.y > point.y && sprite.y < point.y + this.scriptHeight) {
 			return true;
 		}

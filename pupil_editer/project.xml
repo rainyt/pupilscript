@@ -2,7 +2,7 @@
 <project>
 
 	<meta title="PupilEditer" package="com.sample.pupilediter" version="1.0.0" company="Company Name" />
-	<app main="Main" path="Export" file="PupilEditer" />
+	<app main="PupilscriptMain" path="Export" file="PupilEditer" />
 
 	<source path="Source" />
 
