@@ -25,7 +25,7 @@ class Move extends Script {
 	 * @param x 
 	 * @param y 
 	 */
-	public function new(time:Float, x:Float, y:Float) {
+	public function new(time:Float = 1, x:Float = 0, y:Float = 0) {
 		super();
 		this.name = "移动";
 		// 定义描述

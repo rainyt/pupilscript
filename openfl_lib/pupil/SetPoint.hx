@@ -11,12 +11,12 @@ class SetPoint extends Script {
 
 	public var y:Float;
 
-	public function new(x:Float, y:Float) {
+	public function new(x:Float = 0, y:Float = 0) {
 		super();
 		this.x = x;
 		this.y = y;
 		this.desc = [TEXT("设置"), TEXT("X轴"), INPUT("x", 100), TEXT("Y轴"), INPUT("y", 100)];
-        this.color = MOTION_RED;
+		this.color = MOTION_RED;
 	}
 
 	override function onUpdate() {

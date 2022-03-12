@@ -8,22 +8,26 @@
  * 自定义命令
  */
 class CustomScript extends Script {
-	private var _x:Float;
+	public var x:Float;
 
-	private var _y:Float;
+	public var y:Float;
 
-	public function new(x:Float, y:Float) {
+	public function new(x:Float = 0, y:Float = 0) {
 		super();
-		_x = x;
-		_y = y;
+		this.x = x;
+		this.y = y;
+		// 提供给编辑器读取的名字
+		this.name = "自定义脚本";
+		// 如果需要提供修改解释
+		this.desc = [TEXT("递增"),TEXT("X轴"),INPUT("x",50),TEXT("Y轴"),INPUT("y",50)];
 	}
 
 	override function onUpdate() {
 		super.onUpdate();
 		trace("onUpdate");
 		var data:Dynamic = this.display;
-		data.x += _x;
-		data.y += _y;
+		data.x += this.x;
+		data.y += this.y;
         // 当你认为这个脚本已经运行结束了，则运行exit()结束该脚本，如果不调用此方法，onUpdate会不停执行，直到exit()
 		exit();
 	}

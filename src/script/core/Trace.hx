@@ -3,7 +3,7 @@ package script.core;
 class Trace extends Script {
 	public var msg:String;
 
-	public function new(msg:String) {
+	public function new(msg:String = "请输入描述") {
 		super();
 		this.msg = msg;
 		this.name = "输出";
