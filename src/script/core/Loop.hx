@@ -31,6 +31,7 @@ class Loop extends Script {
 		this.color = CONTROL_BLUE;
 		this.supportChildScript = true;
 		this.desc = [TEXT("循环执行"), INPUT("loop", 50), TEXT("次")];
+		this.needDisplay = false;
 	}
 
 	override function onUpdate() {

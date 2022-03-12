@@ -8,6 +8,7 @@ class Break extends Script {
 		super();
 		this.name = "中断";
 		this.color = CONTROL_BLUE;
+		this.needDisplay = false;
 	}
 
 	override function onUpdate() {

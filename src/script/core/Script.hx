@@ -32,6 +32,11 @@ class Script implements IScript {
 	public var display:Any;
 
 	/**
+	 * 是否需要上下文
+	 */
+	public var needDisplay:Bool = true;
+
+	/**
 	 * 脚本逻辑实现方法，每帧都会调用
 	 */
 	public function onUpdate() {}

@@ -87,6 +87,11 @@ interface IScript {
 	public var supportRunChildScript:Bool;
 
 	/**
+	 * 是否需要上下文
+	 */
+	public var needDisplay:Bool;
+
+	/**
 	 * 父节点的脚本
 	 */
 	public var parent:IScript;

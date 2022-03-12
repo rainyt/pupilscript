@@ -17,6 +17,7 @@ class If extends Script {
 		this.name = "判断";
         this.color = CONTROL_BLUE;
 		this.supportChildScript = true;
+		this.needDisplay = false;
 	}
 
 	override function onUpdate() {

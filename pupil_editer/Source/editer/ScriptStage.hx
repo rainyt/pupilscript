@@ -66,7 +66,7 @@ class ScriptStage extends LayoutGroup {
 			loop2.addScript(new Break());
 			loop.addScript(loop2);
 			pupil.addScript(loop);
-			pupil.start();
+			// pupil.start();
 
 			parserScript(pupil);
 

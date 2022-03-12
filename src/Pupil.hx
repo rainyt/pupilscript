@@ -14,6 +14,7 @@ class Pupil extends Script {
 	public function new() {
 		super();
 		this.supportChildScript = true;
+		this.needDisplay = false;
 		this.color = EVENT_DARK_BLUE;
 		this.desc = [
 			TEXT("运行"),

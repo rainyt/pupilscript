@@ -8,6 +8,7 @@ class Trace extends Script {
 		_msg = msg;
 		this.name = "输出";
 		this.color = TRACE_VIOLET;
+		this.needDisplay = false;
 	}
 
 	override function onUpdate() {

@@ -8,6 +8,7 @@ class OneLoop extends Loop {
 		super(1);
 		this.name = "单次执行";
 		this.desc = null;
+		this.needDisplay = false;
 	}
 
 	override function reset(display:Any) {
