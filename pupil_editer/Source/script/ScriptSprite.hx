@@ -32,6 +32,8 @@ class ScriptSprite extends LayoutGroup {
 
 	public var script:IScript;
 
+	public var inputs:Map<String, TextInput> = [];
+
 	public function new(type:ScriptType) {
 		super();
 
@@ -75,12 +77,21 @@ class ScriptSprite extends LayoutGroup {
 				Reflect.setProperty(script, key, Std.parseFloat(textInput.text));
 		});
 		textInput.text = Std.string(Reflect.getProperty(script, key));
+		inputs.set(key, textInput);
 	}
 
 	private function bindButtonClick(button:Button, cb:Void->Void):Void {
 		button.addEventListener(MouseEvent.CLICK, function(e) {
 			cb();
+			// 刷新数据
+			updateData();
 		});
+	}
+
+	public function updateData():Void {
+		for (key => textInput in inputs) {
+			textInput.text = Std.string(Reflect.getProperty(script, key));
+		}
 	}
 
 	private function bindPopUpListView(drop:PopUpListView):Void {

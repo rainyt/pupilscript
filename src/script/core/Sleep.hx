@@ -24,6 +24,7 @@ class Sleep extends Script {
 	override function onUpdate() {
 		super.onUpdate();
 		_time -= 1 / 60;
+		trace("sleep", _time);
 		if (_time <= 0) {
 			exit();
 		}

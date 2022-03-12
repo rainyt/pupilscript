@@ -98,6 +98,8 @@ class ScriptStage extends LayoutGroup {
 	private function onMouseDown(e:MouseEvent):Void {
 		_currentScriptSprite = null;
 		var display:DisplayObject = e.target;
+		if (display == null)
+			return;
 		if (!Std.isOfType(display, ScriptSprite)) {
 			display = display.parent;
 		}
@@ -112,9 +114,13 @@ class ScriptStage extends LayoutGroup {
 		if (!Std.isOfType(display, ScriptSprite)) {
 			display = display.parent;
 		}
+		if (display == null)
+			return;
 		if (!Std.isOfType(display, ScriptSprite)) {
 			display = display.parent;
 		}
+		if (display == null)
+			return;
 		if (!Std.isOfType(display, ScriptSprite))
 			return;
 		if (cast(display, ScriptSprite).type == SELECT) {

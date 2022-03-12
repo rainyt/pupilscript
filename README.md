@@ -1,6 +1,9 @@
 ## 概述
 这是一个可扩展、易用的儿童编程。（在开发中），可用于常用的剧情编辑逻辑实现等。
 
+## 可视化少儿编程
+![avatar](/desc.png)
+
 ## 自定义命令
 通过继承Script实现自定义的命令块，然后添加命令进行执行。
 ```haxe
@@ -81,4 +84,12 @@ ifscript.elseScript = script;
 var script = new If((display)->true);
 script.addScript(new Trace("else"),obj);
 ifscript.elseScript = script;
+```
+
+## 延迟
+如果希望代码延迟执行时，请在前面添加：
+```haxe
+// 延迟两秒
+var script = new Sleep(2);
+runtime.addScript(script);
 ```
