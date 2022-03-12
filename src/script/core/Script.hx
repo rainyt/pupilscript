@@ -87,8 +87,9 @@ class Script implements IScript {
 	 * 删除脚本
 	 * @param script 
 	 */
-	public function removeScript(script:IScript) {
-		script.display = null;
+	public function removeScript(script:IScript, clean:Bool = true):Void {
+		if (clean)
+			script.display = null;
 		script.parent = null;
 		scripts.remove(script);
 	}

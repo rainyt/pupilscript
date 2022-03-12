@@ -59,7 +59,7 @@ interface IScript {
 	 * 删除执行脚本
 	 * @param script 
 	 */
-	public function removeScript(script:IScript):Void;
+	public function removeScript(script:IScript, clean:Bool = true):Void;
 
 	/**
 	 * 脚本名称

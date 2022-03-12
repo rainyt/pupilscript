@@ -6,4 +6,5 @@ package script.core;
 enum Desc {
 	TEXT(text:String);
 	INPUT(key:String);
+	DEBUG(text:String, cb:Void->Void);
 }

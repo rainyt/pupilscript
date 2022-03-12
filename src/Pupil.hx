@@ -1,3 +1,4 @@
+import script.core.IScript;
 import script.core.RuntimeCode;
 import haxe.Timer;
 #if zygame
@@ -14,6 +15,17 @@ class Pupil extends Script {
 		super();
 		this.supportChildScript = true;
 		this.color = EVENT_DARK_BLUE;
+		this.desc = [
+			TEXT("运行"),
+			DEBUG("开始", () -> {
+				if (isStart) {
+					this.stop();
+				} else {
+					this.start();
+				}
+				trace("处理：", isStart);
+			})
+		];
 	}
 
 	/**
@@ -33,11 +45,21 @@ class Pupil extends Script {
 	private var _start:Bool = false;
 
 	/**
+	 * 是否正在运行
+	 */
+	public var isStart(get, never):Bool;
+
+	private function get_isStart():Bool {
+		return _start;
+	}
+
+	/**
 	 * 开始执行
 	 */
 	public function start():Void {
 		if (this.scripts.length == 0 || _start)
 			return;
+		this.resetScriptIndex(this);
 		_start = true;
 		#if zygame
 		FrameEngine.create(function(f) {
@@ -53,10 +75,17 @@ class Pupil extends Script {
 		#end
 	}
 
+	public function resetScriptIndex(script:IScript):Void {
+		script.scriptIndex = -1;
+		for (s in script.scripts) {
+			resetScriptIndex(s);
+		}
+	}
+
 	private function _delayCall():Void {
 		Timer.delay(function() {
 			var exit = Runtime.run(this);
-			if (exit == RuntimeCode.RUNING) {
+			if (!_stop && exit == RuntimeCode.RUNING) {
 				_delayCall();
 			} else {
 				if (exit == RuntimeCode.LOOP_EXIT)
@@ -73,5 +102,6 @@ class Pupil extends Script {
 	 */
 	public function stop():Void {
 		_stop = true;
+		_start = false;
 	}
 }

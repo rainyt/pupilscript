@@ -1,5 +1,7 @@
 package script;
 
+import openfl.events.MouseEvent;
+import feathers.controls.Button;
 import haxe.Timer;
 import script.core.Desc;
 import feathers.controls.TextInput;
@@ -70,6 +72,13 @@ class ScriptSprite extends LayoutGroup {
 		textInput.text = Std.string(Reflect.getProperty(script, key));
 	}
 
+	private function bindButtonClick(button:Button, cb:Void->Void):Void {
+		button.addEventListener(MouseEvent.CLICK, function(e) {
+			trace("执行");
+			cb();
+		});
+	}
+
 	public function draw(script:IScript):Void {
 		this.script = script;
 
@@ -88,6 +97,10 @@ class ScriptSprite extends LayoutGroup {
 							input.width = 50;
 							layoutGroup.addChild(input);
 							bindTextInputChange(input, key);
+						case DEBUG(text, cb):
+							var button = new Button(text);
+							layoutGroup.addChild(button);
+							bindButtonClick(button, cb);
 					}
 				}
 			} else {
