@@ -29,7 +29,14 @@ class Move extends Script {
 		super();
 		this.name = "移动";
 		// 定义描述
-		this.desc = [INPUT("time"), TEXT("秒内移动"), TEXT("X轴"), INPUT("x"), TEXT("Y轴"), INPUT("y")];
+		this.desc = [
+			INPUT("time", 50),
+			TEXT("秒内移动"),
+			TEXT("X轴"),
+			INPUT("x", 100),
+			TEXT("Y轴"),
+			INPUT("y", 100)
+		];
 		this.time = time;
 		this.x = x;
 		this.y = y;

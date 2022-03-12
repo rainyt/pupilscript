@@ -7,6 +7,7 @@ import openfl.display.DisplayObject;
 import openfl.events.MouseEvent;
 import script.core.Break;
 import pupil.Move;
+import pupil.SetPoint;
 import script.core.Loop;
 import openfl.display.Sprite;
 import script.ScriptSprite;
@@ -38,6 +39,7 @@ class ScriptStage extends LayoutGroup {
 			quad.y = 200;
 
 			var pupil = new Pupil();
+			pupil.addScript(quad, new SetPoint(200, 200));
 			var loop = new Loop();
 			loop.addScript(quad, new Move(1, 100, 0));
 			loop.addScript(quad, new Move(2, -100, 0));

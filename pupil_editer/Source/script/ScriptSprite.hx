@@ -89,9 +89,9 @@ class ScriptSprite extends LayoutGroup {
 							var label = new Label(text);
 							layoutGroup.addChild(label);
 						// label.textFormat = new TextFormat(null, 14, 0xffffff);
-						case INPUT(key):
+						case INPUT(key, width):
 							var input = new TextInput();
-							input.width = 50;
+							input.width = width;
 							layoutGroup.addChild(input);
 							bindTextInputChange(input, key);
 						case DEBUG(text, cb):
