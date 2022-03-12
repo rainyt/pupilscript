@@ -1,5 +1,6 @@
 package script;
 
+import feathers.text.TextFormat;
 import openfl.display.DisplayObject;
 import feathers.data.ArrayCollection;
 import feathers.controls.PopUpListView;
@@ -90,6 +91,9 @@ class ScriptSprite extends LayoutGroup {
 	}
 
 	public function draw(script:IScript, clean:Bool = true):Void {
+		if (script == null)
+			return;
+
 		this.script = script;
 
 		if (clean)
@@ -107,7 +111,7 @@ class ScriptSprite extends LayoutGroup {
 						case TEXT(text):
 							var label = new Label(text);
 							layoutGroup.addChild(label);
-						// label.textFormat = new TextFormat(null, 14, 0xffffff);
+							label.textFormat = new TextFormat(null, 16, 0xffffff);
 						case INPUT(key, width):
 							var input = new TextInput();
 							if (width != 0)
@@ -125,7 +129,9 @@ class ScriptSprite extends LayoutGroup {
 				}
 			} else {
 				var pname = script.name == null ? Type.getClassName(Type.getClass(script)) : script.name;
-				layoutGroup.addChild(new Label(pname));
+				var label = new Label(pname);
+				label.textFormat = new TextFormat(null, 16, 0xffffff);
+				layoutGroup.addChild(label);
 			}
 		}
 		if (clean)
@@ -162,6 +168,7 @@ class ScriptSprite extends LayoutGroup {
 			this.graphics.drawRoundRectComplex(0, offestY, itemWidth * 3 / 4, bottomHeight, 0, bottomHeight / 2, 0, bottomHeight / 2);
 			scriptHeight += bottomHeight;
 		}
+		this.height = scriptHeight + 15;
 	}
 
 	/**
@@ -203,4 +210,5 @@ class ScriptSprite extends LayoutGroup {
 enum ScriptType {
 	NONE;
 	PLAY;
+	SELECT;
 }
