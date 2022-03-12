@@ -30,14 +30,7 @@ class Loop extends Script {
 		this.name = "循环执行";
 		this.color = CONTROL_BLUE;
 		this.supportChildScript = true;
-		this.desc = [
-			"循环执行",
-			{
-				type: "input",
-				name: "loop"
-			},
-			"次"
-		];
+		this.desc = [TEXT("循环执行"), INPUT("loop"), TEXT("次")];
 	}
 
 	override function onUpdate() {

@@ -69,7 +69,7 @@ interface IScript {
 	/**
 	 * 脚本描述
 	 */
-	public var desc:Array<Dynamic>;
+	public var desc:Array<Desc>;
 
 	/**
 	 * 该命令的颜色

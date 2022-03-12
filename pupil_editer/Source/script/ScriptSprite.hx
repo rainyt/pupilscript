@@ -1,5 +1,6 @@
 package script;
 
+import script.core.Desc;
 import feathers.controls.TextInput;
 import feathers.controls.TextArea;
 import openfl.events.Event;
@@ -58,11 +59,11 @@ class ScriptSprite extends LayoutGroup {
 		}
 	}
 
-	private function bindTextInputChange(textInput:TextInput, value:Dynamic):Void {
+	private function bindTextInputChange(textInput:TextInput, key:String):Void {
 		textInput.addEventListener(Event.CHANGE, function(e) {
-			Reflect.setProperty(script, value.name, Std.parseFloat(textInput.text));
+			Reflect.setProperty(script, key, Std.parseFloat(textInput.text));
 		});
-		textInput.text = Std.string(Reflect.getProperty(script, value.name));
+		textInput.text = Std.string(Reflect.getProperty(script, key));
 	}
 
 	public function draw(script:IScript):Void {
@@ -73,17 +74,15 @@ class ScriptSprite extends LayoutGroup {
 		if (layoutGroup.numChildren == 0) {
 			if (script.desc != null) {
 				for (index => value in script.desc) {
-					if (Std.isOfType(value, String))
-						layoutGroup.addChild(new Label(value));
-					else {
-						switch (value.type) {
-							case "input":
-								var input = new TextInput();
-								input.width = 50;
-								layoutGroup.addChild(input);
-								layoutGroup.width = 280;
-								bindTextInputChange(input, value);
-						}
+					switch (value) {
+						case TEXT(text):
+							layoutGroup.addChild(new Label(text));
+						case INPUT(key):
+							var input = new TextInput();
+							input.width = 50;
+							layoutGroup.addChild(input);
+							layoutGroup.width = 280;
+							bindTextInputChange(input, key);
 					}
 				}
 			} else {
