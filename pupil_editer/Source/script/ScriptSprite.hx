@@ -1,5 +1,8 @@
 package script;
 
+import openfl.display.DisplayObject;
+import feathers.data.ArrayCollection;
+import feathers.controls.PopUpListView;
 import openfl.events.MouseEvent;
 import feathers.controls.Button;
 import feathers.controls.TextInput;
@@ -76,6 +79,13 @@ class ScriptSprite extends LayoutGroup {
 		});
 	}
 
+	private function bindPopUpListView(drop:PopUpListView):Void {
+		drop.itemToText = (data:DisplayObject) -> data.name;
+		drop.addEventListener(Event.CHANGE, function(e) {
+			script.display = drop.selectedItem;
+		});
+	}
+
 	public function draw(script:IScript):Void {
 		this.script = script;
 
@@ -83,6 +93,11 @@ class ScriptSprite extends LayoutGroup {
 
 		if (layoutGroup.numChildren == 0) {
 			if (script.desc != null) {
+				if (script.display != null) {
+					var drop = new PopUpListView(Main.scriptStage.array);
+					layoutGroup.addChild(drop);
+					bindPopUpListView(drop);
+				}
 				for (index => value in script.desc) {
 					switch (value) {
 						case TEXT(text):

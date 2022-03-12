@@ -45,7 +45,7 @@ interface IScript {
 	 * 添加执行脚本
 	 * @param script 
 	 */
-	public function addScript(display:Any, script:IScript):IScript;
+	public function addScript(script:IScript, display:Any = null):IScript;
 
 	/**
 	 * 添加执行脚本
@@ -53,7 +53,7 @@ interface IScript {
 	 * @param script 
 	 * @param index
 	 */
-	public function addScriptAt(display:Any, script:IScript, index:Int):IScript;
+	public function addScriptAt(script:IScript, index:Int, display:Any = null):IScript;
 
 	/**
 	 * 删除执行脚本

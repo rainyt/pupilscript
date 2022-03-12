@@ -1,5 +1,7 @@
 package editer;
 
+import feathers.data.ArrayCollection;
+import feathers.controls.PopUpListView;
 import feathers.controls.TextInput;
 import script.core.IScript;
 import openfl.text.TextField;
@@ -22,6 +24,8 @@ class ScriptStage extends LayoutGroup {
 	 * 脚本管理
 	 */
 	public var scripts:Array<IScript> = [];
+    
+	public var array:ArrayCollection<DisplayObject> = new ArrayCollection();
 
 	public function new() {
 		super();
@@ -38,16 +42,29 @@ class ScriptStage extends LayoutGroup {
 			quad.x = 200;
 			quad.y = 200;
 
+			var quad2 = new Sprite();
+			this.addChild(quad2);
+			quad2.graphics.beginFill(0xff0000);
+			quad2.graphics.drawRect(0, 0, 50, 50);
+			quad2.x = 400;
+			quad2.y = 200;
+
+			quad.name = "quad";
+			quad2.name = "quad2";
+
+			array.add(quad);
+			array.add(quad2);
+
 			var pupil = new Pupil();
-			pupil.addScript(quad, new SetPoint(200, 200));
+			pupil.addScript(new SetPoint(200, 200), quad);
 			var loop = new Loop();
-			loop.addScript(quad, new Move(1, 100, 0));
-			loop.addScript(quad, new Move(2, -100, 0));
+			loop.addScript(new Move(1, 100, 0), quad);
+			loop.addScript(new Move(2, -100, 0), quad);
 			var loop2 = new Loop();
-			loop2.addScript(quad, new Move(1, 0, -100));
-			loop2.addScript(quad, new Break());
-			loop.addScript(quad, loop2);
-			pupil.addScript(quad, loop);
+			loop2.addScript(new Move(1, 0, -100), quad);
+			loop2.addScript(new Break());
+			loop.addScript(loop2);
+			pupil.addScript(loop);
 			pupil.start();
 
 			parserScript(pupil);
@@ -81,6 +98,10 @@ class ScriptStage extends LayoutGroup {
 		}
 		// 如果是输入组件，则忽略
 		if (Std.isOfType(display, TextInput)) {
+			return;
+		}
+		// 如果是下拉组件，则忽略
+		if (Std.isOfType(display, PopUpListView)) {
 			return;
 		}
 		if (!Std.isOfType(display, ScriptSprite)) {
@@ -132,7 +153,7 @@ class ScriptStage extends LayoutGroup {
 		this.stopDrag();
 		if (_currentScriptSprite != null && _readyAddScriptSprite != null) {
 			var hitIndex = _readyAddScriptSprite.getAddScriptIndex(_currentScriptSprite);
-			_readyAddScriptSprite.script.addScriptAt(_currentScriptSprite.script.display, _currentScriptSprite.script, hitIndex);
+			_readyAddScriptSprite.script.addScriptAt(_currentScriptSprite.script, hitIndex, _currentScriptSprite.script.display);
 			_readyAddScriptSprite.resetDraw();
 		} else if (_currentScriptSprite != null) {
 			_currentScriptSprite.resetDraw();

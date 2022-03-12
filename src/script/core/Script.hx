@@ -60,8 +60,8 @@ class Script implements IScript {
 	 * @param script 脚本
 	 * @return IScript
 	 */
-	public function addScript(display:Any, script:IScript):IScript {
-		addScriptAt(display, script, scripts.length);
+	public function addScript(script:IScript, display:Any = null):IScript {
+		addScriptAt(script, scripts.length, display);
 		return this;
 	}
 
@@ -72,7 +72,7 @@ class Script implements IScript {
 	 * @param index 
 	 * @return IScript
 	 */
-	public function addScriptAt(display:Any, script:IScript, index:Int):IScript {
+	public function addScriptAt(script:IScript, index:Int, display:Any = null):IScript {
 		if (script.parent != null)
 			script.parent.removeScript(script);
 		script.parent = this;

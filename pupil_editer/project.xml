@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
-	
+
 	<meta title="PupilEditer" package="com.sample.pupilediter" version="1.0.0" company="Company Name" />
 	<app main="Main" path="Export" file="PupilEditer" />
-	
+
 	<source path="Source" />
-	
+
 	<haxelib name="openfl" />
 
-	<haxelib name="feathersui"/>
+	<haxelib name="feathersui" />
 
-	<haxelib name="pupilscript"/>
-	
+	<haxelib name="pupilscript" />
+
 	<assets path="Assets" rename="assets" />
 
-	<window allow-high-dpi="true"/>
-	
+	<window allow-high-dpi="true" />
+
+	<!-- <define name="dom"/> -->
+
 </project>

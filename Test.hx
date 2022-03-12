@@ -11,10 +11,10 @@ class Test {
 			y: 0
 		};
 		// 添加命令执行循序
-		pupil.addScript(obj, new Loop().addScript(obj, new CustomScript(1, 5)).addScript(obj, new Break()));
-		pupil.addScript(obj, new CustomScript(10, 10));
-		pupil.addScript(obj, new CustomScript(20, 20));
-		pupil.addScript(obj, new CustomScript(-20, 10));
+		pupil.addScript(new Loop().addScript(new CustomScript(1, 5), obj).addScript(new Break()));
+		pupil.addScript(new CustomScript(10, 10), obj);
+		pupil.addScript(new CustomScript(20, 20), obj);
+		pupil.addScript(new CustomScript(-20, 10), obj);
 		// 开始
 		pupil.start();
 		pupil.onExit = function(code) {
