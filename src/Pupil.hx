@@ -13,6 +13,7 @@ class Pupil extends Script {
 	public function new() {
 		super();
 		this.supportChildScript = true;
+		this.color = EVENT_DARK_BLUE;
 	}
 
 	/**

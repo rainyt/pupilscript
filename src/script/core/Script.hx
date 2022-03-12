@@ -108,4 +108,9 @@ class Script implements IScript {
 	public var parent:IScript;
 
 	public var customData:Any;
+
+	/**
+	 * 命令模块颜色分类
+	 */
+	public var color:Color = NONE;
 }

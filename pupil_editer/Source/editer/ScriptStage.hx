@@ -1,5 +1,6 @@
 package editer;
 
+import feathers.controls.TextInput;
 import script.core.IScript;
 import openfl.text.TextField;
 import openfl.display.DisplayObject;
@@ -75,6 +76,10 @@ class ScriptStage extends LayoutGroup {
 		var display:DisplayObject = e.target;
 		if (!Std.isOfType(display, ScriptSprite)) {
 			display = display.parent;
+		}
+		// 如果是输入组件，则忽略
+		if (Std.isOfType(display, TextInput)) {
+			return;
 		}
 		if (!Std.isOfType(display, ScriptSprite)) {
 			display = display.parent;

@@ -28,6 +28,7 @@ class Loop extends Script {
 		super();
 		_loop = loop;
 		this.name = "循环执行";
+		this.color = CONTROL_BLUE;
 		this.supportChildScript = true;
 	}
 

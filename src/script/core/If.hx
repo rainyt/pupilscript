@@ -15,6 +15,7 @@ class If extends Script {
 		super();
 		_iffunc = iffunc;
 		this.name = "判断";
+        this.color = CONTROL_BLUE;
 		this.supportChildScript = true;
 	}
 

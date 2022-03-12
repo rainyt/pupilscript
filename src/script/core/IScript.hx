@@ -72,6 +72,11 @@ interface IScript {
 	public var desc:Array<Dynamic>;
 
 	/**
+	 * 该命令的颜色
+	 */
+	public var color:Color;
+
+	/**
 	 * 是否支持子脚本
 	 */
 	public var supportChildScript:Bool;

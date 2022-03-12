@@ -63,25 +63,25 @@ class ScriptSprite extends LayoutGroup {
 
 		this.removeChildren();
 
-		layoutGroup.removeChildren();
-		if (script.desc != null) {
-			// layoutGroup.addChild(new Label("???"));
-			for (index => value in script.desc) {
-				if (Std.isOfType(value, String))
-					layoutGroup.addChild(new Label(value));
-				else {
-					switch (value.type) {
-						case "input":
-							var input = new TextInput();
-							input.width = 50;
-							layoutGroup.addChild(input);
-							layoutGroup.width = 280;
+		if (layoutGroup.numChildren == 0) {
+			if (script.desc != null) {
+				for (index => value in script.desc) {
+					if (Std.isOfType(value, String))
+						layoutGroup.addChild(new Label(value));
+					else {
+						switch (value.type) {
+							case "input":
+								var input = new TextInput();
+								input.width = 50;
+								layoutGroup.addChild(input);
+								layoutGroup.width = 280;
+						}
 					}
 				}
+			} else {
+				var pname = script.name == null ? Type.getClassName(Type.getClass(script)) : script.name;
+				layoutGroup.addChild(new Label(pname));
 			}
-		} else {
-			var pname = script.name == null ? Type.getClassName(Type.getClass(script)) : script.name;
-			layoutGroup.addChild(new Label(pname));
 		}
 		this.addChild(layoutGroup);
 
@@ -98,7 +98,7 @@ class ScriptSprite extends LayoutGroup {
 		var offestX:Float = bottomHeight;
 		var offestY:Float = itemHeight;
 		this.graphics.clear();
-		this.graphics.beginFill(0xffccee, 1);
+		this.graphics.beginFill(cast script.color, 1);
 		this.graphics.lineStyle(1, 0x0);
 		this.graphics.drawRoundRectComplex(0, 0, itemWidth, itemHeight, 0, itemHeight / 2, 0, itemHeight / 2);
 		scriptHeight = 36;

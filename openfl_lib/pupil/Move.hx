@@ -48,6 +48,7 @@ class Move extends Script {
 		_time = time;
 		_x = x;
 		_y = y;
+		this.color = MOTION_RED;
 	}
 
 	override function reset(display:Any) {
