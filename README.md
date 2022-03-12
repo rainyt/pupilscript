@@ -35,7 +35,7 @@ class CustomScript extends Script {
 var runtime = new Pupil();
 // 添加命令
 var obj = {x:0,y:0};
-runtime.addScript(obj,new CustomScript(10,10));
+runtime.addScript(new CustomScript(10,10),obj);
 runtime.start();
 ```
 
@@ -44,7 +44,7 @@ runtime.start();
 ```haxe
 var loop = new Loop();
 runtime.addScript(loop);
-loop.addScript(obj, new CustomScript(10,10));
+loop.addScript(new CustomScript(10,10),obj);
 ```
 如果需要指定次数，可以：
 ```haxe
@@ -55,26 +55,26 @@ var loop = new Loop(5);
 ## 中断 break
 可以在循环结构体中使用，进行中断运行：
 ```haxe
-loop.addScript(obj,new Break());
+loop.addScript(new Break());
 ```
 
 ## 判断 if
 可以自定义判断条件，进行逻辑判断，当逻辑符合时，就会执行`If`中的程序。
 ```haxe
 // 循环里新增一个判断，判断里放了一个break
-loop.addScript(obj ,new If((display)->true).addScript(obj, new Break()));
+loop.addScript(new If((display)->true).addScript(obj, new Break()),obj);
 ```
 
 ## 否则 else
 可以在`If`条件中设置`elseScript`，如：
 ```haxe
 var script = new OneLoop();
-script.addScript(obj, new Trace("else"));
+script.addScript(new Trace("else"),obj);
 ifscript.elseScript = script;
 ```
 如果是elseif，那么可以直接传递`If`对象：
 ```haxe
 var script = new If((display)->true);
-script.addScript(obj, new Trace("else"));
+script.addScript(new Trace("else"),obj);
 ifscript.elseScript = script;
 ```
