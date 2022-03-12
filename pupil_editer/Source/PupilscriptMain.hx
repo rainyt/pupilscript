@@ -4,6 +4,7 @@ import feathers.controls.LayoutGroup;
 import pupil.SetPoint;
 import script.core.Trace;
 import script.core.Aync;
+import script.core.Sleep;
 import editer.ActionMenu;
 import script.core.Script;
 import editer.ScriptStage;
@@ -26,7 +27,7 @@ import feathers.controls.Application;
 /**
  * PupilScript可视化编辑器
  */
-class PupilscriptMain extends #if pupilediter LayoutGroup #else Application #end {
+class PupilscriptMain extends #if false LayoutGroup #else Application #end {
 	public static var leftMenu:ActionMenu;
 
 	public static var current:PupilscriptMain;
@@ -38,6 +39,8 @@ class PupilscriptMain extends #if pupilediter LayoutGroup #else Application #end
 		current = this;
 		#if !pupilediter
 		this.backgroundSkin = new RectangleSkin(SolidColor(0x252525));
+		#else
+		this.backgroundSkin = null;
 		#end
 		this.layout = new AnchorLayout();
 		leftMenu = new ActionMenu();
@@ -51,11 +54,12 @@ class PupilscriptMain extends #if pupilediter LayoutGroup #else Application #end
 		// 注册脚本
 		leftMenu.addScript(new Loop());
 		leftMenu.addScript(new Aync());
-		leftMenu.addScript(new Move());
 		leftMenu.addScript(new OneLoop());
 		leftMenu.addScript(new Trace());
 		leftMenu.addScript(new Pupil());
 		leftMenu.addScript(new Break());
+		leftMenu.addScript(new Move());
+		leftMenu.addScript(new Sleep());
 		leftMenu.addScript(new SetPoint());
 	}
 }

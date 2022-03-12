@@ -2,7 +2,7 @@ package script.core;
 
 enum abstract Color(UInt) {
 	// 未分类
-	var NONE = 0xf5be67;
+	var NONE = 0x4cb051;
 	// 深蓝色，事件分类
 	var EVENT_DARK_BLUE = 0x6a8ee7;
 	// 蓝色，控制分类

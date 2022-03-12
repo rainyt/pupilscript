@@ -65,6 +65,8 @@ class Pupil extends Script {
 		#if zygame
 		FrameEngine.create(function(f) {
 			var code = Runtime.run(this);
+			if (code == RuntimeCode.LOOP_EXIT)
+				code = RuntimeCode.EXIT;
 			if (_stop || code == RuntimeCode.EXIT) {
 				f.stop();
 				_stop = false;

@@ -32,6 +32,7 @@ class ScriptStage extends LayoutGroup {
 	public function new() {
 		super();
 		this.addEventListener(Event.ADDED_TO_STAGE, function(e) {
+			#if !pupilediter
 			var script = new ScriptSprite(PLAY);
 			this.addChild(script);
 			script.x = 400;
@@ -73,6 +74,7 @@ class ScriptStage extends LayoutGroup {
 			parserScript(pupil);
 
 			script.draw(pupil);
+			#end
 
 			stage.addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
 			stage.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);

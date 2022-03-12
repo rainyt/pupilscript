@@ -100,13 +100,13 @@ class ScriptSprite extends LayoutGroup {
 			this.removeChildren();
 
 		if (layoutGroup.numChildren == 0) {
+			if (script.needDisplay) {
+				var drop = new PopUpListView(PupilscriptMain.scriptStage.array);
+				drop.selectedItem = script.display;
+				layoutGroup.addChild(drop);
+				bindPopUpListView(drop);
+			}
 			if (script.desc != null) {
-				if (script.needDisplay) {
-					var drop = new PopUpListView(PupilscriptMain.scriptStage.array);
-					drop.selectedItem = script.display;
-					layoutGroup.addChild(drop);
-					bindPopUpListView(drop);
-				}
 				for (index => value in script.desc) {
 					switch (value) {
 						case TEXT(text):
