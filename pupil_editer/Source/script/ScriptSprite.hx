@@ -1,5 +1,6 @@
 package script;
 
+import haxe.Timer;
 import script.core.Desc;
 import feathers.controls.TextInput;
 import feathers.controls.TextArea;
@@ -42,10 +43,13 @@ class ScriptSprite extends LayoutGroup {
 		this.addChild(layoutGroup);
 		layoutGroup.layout = new HorizontalLayout();
 		cast(layoutGroup.layout, HorizontalLayout).verticalAlign = VerticalAlign.MIDDLE;
-		layoutGroup.width = 200;
+		// layoutGroup.width = 200;
 		layoutGroup.height = 36;
 		cast(layoutGroup.layout, HorizontalLayout).paddingLeft = 5;
 		cast(layoutGroup.layout, HorizontalLayout).paddingRight = 5;
+		layoutGroup.addEventListener(Event.RESIZE, function(e) {
+			draw(script);
+		});
 	}
 
 	public var scriptHeight:Float = 0;
@@ -76,12 +80,13 @@ class ScriptSprite extends LayoutGroup {
 				for (index => value in script.desc) {
 					switch (value) {
 						case TEXT(text):
-							layoutGroup.addChild(new Label(text));
+							var label = new Label(text);
+							layoutGroup.addChild(label);
+						// label.textFormat = new TextFormat(null, 14, 0xffffff);
 						case INPUT(key):
 							var input = new TextInput();
 							input.width = 50;
 							layoutGroup.addChild(input);
-							layoutGroup.width = 280;
 							bindTextInputChange(input, key);
 					}
 				}
@@ -91,16 +96,9 @@ class ScriptSprite extends LayoutGroup {
 			}
 		}
 		this.addChild(layoutGroup);
-
-		trace(layoutGroup.getBounds(null));
-
 		script.customData = this;
-		// label.text =
-		// label.setTextFormat(new TextFormat(null, 14));
-		// label.y = (32 - label.textHeight) / 2;
-		// this.addChild(label);
 		var itemHeight = 36;
-		var itemWidth = layoutGroup.width + 20;
+		var itemWidth = layoutGroup.width + 10;
 		var bottomHeight = 16;
 		var offestX:Float = bottomHeight;
 		var offestY:Float = itemHeight;
