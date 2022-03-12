@@ -2,25 +2,22 @@ package script;
 
 import openfl.events.MouseEvent;
 import feathers.controls.Button;
-import haxe.Timer;
-import script.core.Desc;
 import feathers.controls.TextInput;
-import feathers.controls.TextArea;
 import openfl.events.Event;
 import feathers.layout.VerticalAlign;
 import feathers.controls.Label;
 import feathers.layout.HorizontalLayout;
 import feathers.controls.LayoutGroup;
 import openfl.geom.Point;
-import openfl.text.TextFormat;
 import openfl.text.TextField;
 import script.core.IScript;
-import openfl.display.Sprite;
 
 /**
  * 脚本精灵
  */
 class ScriptSprite extends LayoutGroup {
+	public static var line:ScriptLine = new ScriptLine();
+
 	public static var point:Point = new Point();
 
 	public var layoutGroup:LayoutGroup;
@@ -151,13 +148,18 @@ class ScriptSprite extends LayoutGroup {
 		point = this.parent.localToGlobal(point);
 		point = Main.scriptStage.globalToLocal(point);
 		var index = 0;
+		var lineY:Float = 36;
 		for (i => s in script.scripts) {
 			var display = cast(s.customData, ScriptSprite);
 			trace(sprite.y, point.y + display.y + display.scriptHeight / 2);
 			if (sprite.y > point.y + display.y + display.scriptHeight / 2) {
 				index = i + 1;
+				lineY = display.y + display.scriptHeight;
 			}
 		}
+		line.y = point.y + lineY;
+		line.x = 16 + point.x;
+		Main.scriptStage.addChild(line);
 		return index;
 	}
 

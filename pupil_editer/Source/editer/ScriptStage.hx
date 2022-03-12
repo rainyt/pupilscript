@@ -109,12 +109,16 @@ class ScriptStage extends LayoutGroup {
 			} else {
 				// 组装逻辑
 				_readyAddScriptSprite = null;
+				if (ScriptSprite.line.parent != null) {
+					ScriptSprite.line.parent.removeChild(ScriptSprite.line);
+				}
 				for (script in scripts) {
 					var spriteScript:ScriptSprite = script.customData;
 					if (spriteScript.script.supportChildScript
 						&& spriteScript != _currentScriptSprite
 						&& spriteScript.test(_currentScriptSprite)) {
 						_readyAddScriptSprite = spriteScript;
+						var hitIndex = _readyAddScriptSprite.getAddScriptIndex(_currentScriptSprite);
 						break;
 					}
 				}
@@ -126,11 +130,13 @@ class ScriptStage extends LayoutGroup {
 		this.stopDrag();
 		if (_currentScriptSprite != null && _readyAddScriptSprite != null) {
 			var hitIndex = _readyAddScriptSprite.getAddScriptIndex(_currentScriptSprite);
-			trace("添加到：", hitIndex);
 			_readyAddScriptSprite.script.addScriptAt(_currentScriptSprite.script.display, _currentScriptSprite.script, hitIndex);
 			_readyAddScriptSprite.resetDraw();
 		} else if (_currentScriptSprite != null) {
 			_currentScriptSprite.resetDraw();
+		}
+		if (ScriptSprite.line.parent != null) {
+			ScriptSprite.line.parent.removeChild(ScriptSprite.line);
 		}
 		_readyAddScriptSprite = null;
 		_currentScriptSprite = null;
