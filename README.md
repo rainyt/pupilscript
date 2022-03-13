@@ -115,3 +115,18 @@ PupilscriptMain.leftMenu.addScript(new RolePoint());
 // 新增控制角色
 PupilscriptMain.scriptStage.array.add(this.role);
 ```
+
+## 脚本导出
+可以通过`toScriptData`的方式导出Json格式的数据：
+```haxe
+Json.stringify(script.toScriptData());
+```
+
+## 脚本还原
+当有了文本数据后，就可以通过对应的API进行还原，例如：
+```haxe
+Script.fromText(Json.stringify(script.toScriptData()),function(data:ScriptData):Any{
+	// 通过data数据解析应该正确绑定的显示对象
+	return null;
+});
+```
