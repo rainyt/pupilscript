@@ -131,6 +131,7 @@ class Script implements IScript {
 	 */
 	public function toScriptData():ScriptData {
 		var data:ScriptData = {
+			display: this.display != null ? Reflect.getProperty(this.display, "name") : null,
 			className: Type.getClassName(Type.getClass(this)),
 			params: [],
 			scripts: []

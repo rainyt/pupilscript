@@ -1,5 +1,6 @@
 package editer;
 
+import haxe.Json;
 import script.core.Trace;
 import feathers.data.ArrayCollection;
 import feathers.controls.PopUpListView;
@@ -74,6 +75,8 @@ class ScriptStage extends LayoutGroup {
 			parserScript(pupil);
 
 			script.draw(pupil);
+
+			trace(Json.stringify(pupil.toScriptData()));
 			#end
 
 			stage.addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
