@@ -1,5 +1,6 @@
 package editer;
 
+import script.core.Script;
 import haxe.Json;
 import script.core.Trace;
 import feathers.data.ArrayCollection;
@@ -76,7 +77,11 @@ class ScriptStage extends LayoutGroup {
 
 			script.draw(pupil);
 
-			trace(Json.stringify(pupil.toScriptData()));
+			var json = Json.stringify(pupil.toScriptData());
+			trace(json);
+
+			var scriptRecovery = Script.fromText(json);
+			trace("还原", scriptRecovery);
 			#end
 
 			stage.addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);

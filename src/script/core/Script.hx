@@ -1,5 +1,7 @@
 package script.core;
 
+import haxe.Json;
+
 /**
  * 通用的基础Script脚本基础实现
  */
@@ -149,5 +151,39 @@ class Script implements IScript {
 			data.scripts.push(s.toScriptData());
 		}
 		return data;
+	}
+
+	public static function recovery(data:ScriptData):IScript {
+		var script:IScript = Type.createInstance(Type.resolveClass(data.className), data.params);
+		for (s in data.scripts) {
+			script.scripts.push(recovery(s));
+		}
+		return script;
+	}
+
+	/**
+	 * 从字符串还原
+	 * @param text 
+	 * @return IScript
+	 */
+	public static function fromText(text:String):IScript {
+		return fromJson(Json.parse(text));
+	}
+
+	/**
+	 * 从Json还原
+	 * @param json 
+	 */
+	public static function fromJson(json:Dynamic):IScript {
+		return fromScriptData(json);
+	}
+
+	/**
+	 * 从ScritpData数据还原
+	 * @param data 
+	 * @return IScript
+	 */
+	public static function fromScriptData(data:ScriptData):IScript {
+		return recovery(data);
 	}
 }

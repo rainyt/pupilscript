@@ -22,7 +22,11 @@ class Test {
 			trace("运行结果：", code, obj);
 		}
 
-		trace("储存数据：", Json.stringify(pupil.toScriptData()));
+		var sdata = Json.stringify(pupil.toScriptData());
+		trace("储存数据：", sdata);
+
+		var pupilBack = Script.fromText(sdata);
+		trace("\n\n\n\n还原：", pupilBack);
 	}
 }
 
