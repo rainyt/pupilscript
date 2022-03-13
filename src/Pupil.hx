@@ -107,4 +107,13 @@ class Pupil extends Script {
 		_stop = true;
 		_start = false;
 	}
+
+	/**
+	 * 生成出hscript脚本
+	 * @return String
+	 */
+	public function toHScript():String {
+		var hscript = "";
+		return hscript;
+	}
 }

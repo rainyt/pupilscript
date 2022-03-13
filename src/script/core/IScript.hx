@@ -100,4 +100,10 @@ interface IScript {
 	 * 自定义数据
 	 */
 	public var customData:Any;
+
+	/**
+	 * 转换为ScriptData数据，用于文本储存，以便后续需要还原时读取
+	 * @return String
+	 */
+	public function toScriptData():ScriptData;
 }

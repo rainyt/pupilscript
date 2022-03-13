@@ -124,4 +124,29 @@ class Script implements IScript {
 	 * 是否支持运行子脚本
 	 */
 	public var supportRunChildScript:Bool = true;
+
+	/**
+	 * 转换为ScriptData数据，用于文本储存，以便后续需要还原时读取
+	 * @return String
+	 */
+	public function toScriptData():ScriptData {
+		var data:ScriptData = {
+			className: Type.getClassName(Type.getClass(this)),
+			params: [],
+			scripts: []
+		};
+		if (desc != null) {
+			for (d in desc) {
+				switch (d) {
+					case INPUT(key, width):
+						data.params.push(Reflect.getProperty(this, key));
+					default:
+				}
+			}
+		}
+		for (s in scripts) {
+			data.scripts.push(s.toScriptData());
+		}
+		return data;
+	}
 }

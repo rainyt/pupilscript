@@ -1,3 +1,4 @@
+import haxe.Json;
 import script.core.Break;
 import script.core.Loop;
 import script.core.Script;
@@ -20,6 +21,8 @@ class Test {
 		pupil.onExit = function(code) {
 			trace("运行结果：", code, obj);
 		}
+
+		trace("储存数据：", Json.stringify(pupil.toScriptData()));
 	}
 }
 
@@ -27,22 +30,23 @@ class Test {
  * 自定义命令
  */
 class CustomScript extends Script {
-	private var _x:Float;
+	public var x:Float;
 
-	private var _y:Float;
+	public var y:Float;
 
 	public function new(x:Float, y:Float) {
 		super();
-		_x = x;
-		_y = y;
+		this.x = x;
+		this.y = y;
+		this.desc = [TEXT("X"), INPUT("x", 50), TEXT("Y"), INPUT("y", 50)];
 	}
 
 	override function onUpdate() {
 		super.onUpdate();
 		trace("onUpdate");
 		var data:Dynamic = this.display;
-		data.x += _x;
-		data.y += _y;
+		data.x += x;
+		data.y += y;
 		exit();
 	}
 }
