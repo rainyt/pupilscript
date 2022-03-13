@@ -93,3 +93,25 @@ ifscript.elseScript = script;
 var script = new Sleep(2);
 runtime.addScript(script);
 ```
+
+## 高级使用
+库中自带有一个编辑器功能，可以提供给OpenFL项目直接使用，如果需要给自已的游戏添加一个编辑器功能，那么这个就很有用。
+```haxe
+// 构造儿童编程模块
+var pupilEditer = new PupilscriptMain();
+this.addChild(pupilEditer);
+pupilEditer.backgroundSkin = null;
+// 屏幕适配
+pupilEditer.scaleManager = new CustomScaleManager(2, new Rectangle(0, 0, getStageWidth(), getStageHeight()));
+// 新增自定义脚本
+// 角色交互
+PupilscriptMain.leftMenu.addScript(new RoleInteractive());
+// 角色移动
+PupilscriptMain.leftMenu.addScript(new RoleMove());
+// 角色说话
+PupilscriptMain.leftMenu.addScript(new RoleDialog());
+// 角色定位
+PupilscriptMain.leftMenu.addScript(new RolePoint());
+// 新增控制角色
+PupilscriptMain.scriptStage.array.add(this.role);
+```
