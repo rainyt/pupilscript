@@ -153,10 +153,13 @@ class Script implements IScript {
 		return data;
 	}
 
-	public static function recovery(data:ScriptData):IScript {
+	public static function recovery(data:ScriptData, onDisplayBind:ScriptData->Any):IScript {
 		var script:IScript = Type.createInstance(Type.resolveClass(data.className), data.params);
+		if (onDisplayBind != null) {
+			script.display = onDisplayBind(data);
+		}
 		for (s in data.scripts) {
-			script.scripts.push(recovery(s));
+			script.scripts.push(recovery(s, onDisplayBind));
 		}
 		return script;
 	}
@@ -166,16 +169,16 @@ class Script implements IScript {
 	 * @param text 
 	 * @return IScript
 	 */
-	public static function fromText(text:String):IScript {
-		return fromJson(Json.parse(text));
+	public static function fromText(text:String, onDisplayBind:ScriptData->Any = null):IScript {
+		return fromJson(Json.parse(text), onDisplayBind);
 	}
 
 	/**
 	 * 从Json还原
 	 * @param json 
 	 */
-	public static function fromJson(json:Dynamic):IScript {
-		return fromScriptData(json);
+	public static function fromJson(json:Dynamic, onDisplayBind:ScriptData->Any = null):IScript {
+		return fromScriptData(json, onDisplayBind);
 	}
 
 	/**
@@ -183,7 +186,7 @@ class Script implements IScript {
 	 * @param data 
 	 * @return IScript
 	 */
-	public static function fromScriptData(data:ScriptData):IScript {
-		return recovery(data);
+	public static function fromScriptData(data:ScriptData, onDisplayBind:ScriptData->Any = null):IScript {
+		return recovery(data, onDisplayBind);
 	}
 }
