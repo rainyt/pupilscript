@@ -1,5 +1,7 @@
 package script.core;
 
+import script.event.IScriptEvent;
+
 /**
  * 脚本接口实现
  */
@@ -106,4 +108,16 @@ interface IScript {
 	 * @return String
 	 */
 	public function toScriptData():ScriptData;
+
+	/**
+	 * 侦听事件
+	 * @param listener 
+	 */
+	public function addListener(listener:IScriptEvent):Void;
+
+	/**
+	 * 移除事件
+	 * @param listener 
+	 */
+	public function removeListener(listener:IScriptEvent):Void;
 }

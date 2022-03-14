@@ -1,5 +1,6 @@
 package script.core;
 
+import script.event.IScriptEvent;
 import haxe.Json;
 
 /**
@@ -41,7 +42,11 @@ class Script implements IScript {
 	/**
 	 * 脚本逻辑实现方法，每帧都会调用
 	 */
-	public function onUpdate() {}
+	public function onUpdate() {
+		for (event in _listeners) {
+			event.onUpdate();
+		}
+	}
 
 	/**
 	 * 当脚本重新开始执行时的重置方法
@@ -50,6 +55,9 @@ class Script implements IScript {
 	public function reset(display:Any) {
 		this.state = RuntimeCode.RUNING;
 		this.display = display;
+		for (event in _listeners) {
+			event.onStart();
+		}
 	}
 
 	/**
@@ -59,6 +67,9 @@ class Script implements IScript {
 	public function exit(code:RuntimeCode = RuntimeCode.EXIT):Void {
 		this.scriptIndex = -1;
 		state = code;
+		for (event in _listeners) {
+			event.onExit(state);
+		}
 	}
 
 	/**
@@ -188,5 +199,27 @@ class Script implements IScript {
 	 */
 	public static function fromScriptData(data:ScriptData, onDisplayBind:ScriptData->Any = null):IScript {
 		return recovery(data, onDisplayBind);
+	}
+
+	/**
+	 * 事件列表
+	 */
+	private var _listeners:Array<IScriptEvent> = [];
+
+	/**
+	 * 侦听事件
+	 * @param listener 
+	 */
+	public function addListener(listener:IScriptEvent) {
+		if (_listeners.indexOf(listener) != -1)
+			_listeners.push(listener);
+	}
+
+	/**
+	 * 移除事件
+	 * @param listener 
+	 */
+	public function removeListener(listener:IScriptEvent) {
+		_listeners.remove(listener);
 	}
 }
