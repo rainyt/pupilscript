@@ -1,3 +1,4 @@
+import script.utils.HaxeScript;
 import haxe.Json;
 import script.core.Break;
 import script.core.Loop;
@@ -27,6 +28,10 @@ class Test {
 
 		var pupilBack = Script.fromText(sdata);
 		trace("\n\n\n\n还原：", pupilBack);
+
+		var haxedata = HaxeScript.convertToHaxe(pupil.toScriptData());
+		trace("Haxe语法：", "\n" + haxedata + "\n\n\n");
+		
 	}
 }
 

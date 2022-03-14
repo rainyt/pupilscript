@@ -130,3 +130,8 @@ Script.fromText(Json.stringify(script.toScriptData()),function(data:ScriptData):
 	return null;
 });
 ```
+也可以将ScriptData转换成Haxe语法：（但使用该方法的时候，没有对象引用，请根据实际需求调整）
+```haxe
+// 转成Haxe语言
+var haxeScript = HaxeScript.convertToHaxe(script.toScriptData());
+```
