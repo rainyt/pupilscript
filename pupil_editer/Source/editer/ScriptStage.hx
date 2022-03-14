@@ -119,6 +119,8 @@ class ScriptStage extends LayoutGroup {
 		if (Std.isOfType(display, PopUpListView)) {
 			return;
 		}
+		if (display == null)
+			return;
 		if (!Std.isOfType(display, ScriptSprite)) {
 			display = display.parent;
 		}

@@ -17,6 +17,7 @@ class Test {
 		pupil.addScript(new CustomScript(10, 10), obj);
 		pupil.addScript(new CustomScript(20, 20), obj);
 		pupil.addScript(new CustomScript(-20, 10), obj);
+
 		// 开始
 		pupil.start();
 		pupil.onExit = function(code) {
@@ -31,6 +32,7 @@ class Test {
 
 		var haxedata = HaxeScript.convertToHaxe(pupil.toScriptData());
 		trace("Haxe语法：", "\n" + haxedata + "\n\n\n");
+
 		
 	}
 }
