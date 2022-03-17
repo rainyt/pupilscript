@@ -1,5 +1,6 @@
 package;
 
+import script.core.ScriptData;
 import feathers.controls.LayoutGroup;
 import pupil.SetPoint;
 import script.core.Trace;
@@ -61,5 +62,9 @@ class PupilscriptMain extends #if false LayoutGroup #else Application #end {
 		leftMenu.addScript(new Move());
 		leftMenu.addScript(new Sleep());
 		leftMenu.addScript(new SetPoint());
+	}
+
+	public function bindSaveData(save:Array<ScriptData>->Void):Void {
+		leftMenu.onSaveData = save;
 	}
 }

@@ -11,14 +11,18 @@ import script.core.Script;
  * 参考儿童编程，可以自定义组件，使组件按循序执行
  */
 class Pupil extends Script {
-	public function new() {
+	public var pupilName:String;
+
+	public function new(pupilName:String = "main") {
 		super();
+		this.pupilName = pupilName;
 		this.supportChildScript = true;
 		this.needDisplay = false;
 		this.color = EVENT_DARK_BLUE;
 		this.desc = [
-			TEXT("运行"),
-			DEBUG("开始", () -> {
+			TEXT("程序名称"),
+			INPUT("pupilName", 0),
+			DEBUG("运行", () -> {
 				if (isStart) {
 					this.stop();
 				} else {

@@ -1,5 +1,6 @@
 package editer;
 
+import script.core.ScriptData;
 import feathers.layout.AnchorLayoutData;
 import openfl.events.MouseEvent;
 import feathers.data.ArrayCollection;
@@ -36,7 +37,21 @@ class ActionMenu extends LayoutGroup {
 			stage.focus = listView;
 			listView.visible = true;
 		});
+
+		var save:Button = new Button("保存");
+		this.addChild(save);
+		save.addEventListener(MouseEvent.CLICK, function(e) {
+			var array = [];
+			for (script in PupilscriptMain.scriptStage.scripts) {
+				if (Std.isOfType(script, Pupil)) {
+					array.push(script.toScriptData());
+				}
+			}
+			this.onSaveData(array);
+		});
 	}
+
+	dynamic public function onSaveData(data:Array<ScriptData>):Void {}
 
 	/**
 	 * 注册脚本列表
