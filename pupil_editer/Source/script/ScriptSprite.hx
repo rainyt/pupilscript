@@ -1,5 +1,6 @@
 package script;
 
+import feathers.controls.Check;
 import feathers.text.TextFormat;
 import openfl.display.DisplayObject;
 import feathers.data.ArrayCollection;
@@ -88,6 +89,13 @@ class ScriptSprite extends LayoutGroup {
 		});
 	}
 
+	private function bindCheckButton(check:Check, key:String):Void {
+		check.selected = Reflect.getProperty(script, key) == true;
+		check.addEventListener(Event.CHANGE, function(e) {
+			Reflect.setProperty(script, key, check.selected);
+		});
+	}
+
 	public function updateData():Void {
 		for (key => textInput in inputs) {
 			textInput.text = Std.string(Reflect.getProperty(script, key));
@@ -137,6 +145,10 @@ class ScriptSprite extends LayoutGroup {
 							var button = new Button(text);
 							layoutGroup.addChild(button);
 							bindButtonClick(button, cb);
+						case BOOL(key, text):
+							var check = new Check(text);
+							layoutGroup.addChild(check);
+							bindCheckButton(check, key);
 					}
 				}
 			} else {

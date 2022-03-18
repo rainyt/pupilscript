@@ -1,5 +1,6 @@
 package editer;
 
+import script.core.ScriptData;
 import script.core.Script;
 import haxe.Json;
 import script.core.Trace;
@@ -88,6 +89,25 @@ class ScriptStage extends LayoutGroup {
 			stage.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
 			stage.addEventListener(MouseEvent.MOUSE_UP, onMouseUp);
 		});
+	}
+
+	/**
+	 * 载入全新的脚本列表
+	 * @param array 
+	 */
+	public function loadScripts(array:Array<ScriptData>, onDisplayBind:ScriptData->Dynamic):Void {
+		scripts = [];
+		this.removeChildren();
+		var offestX:Float = 0;
+		for (data in array) {
+			var sprite = new ScriptSprite(NONE);
+			this.addChild(sprite);
+			sprite.x = offestX;
+			var script = Script.fromScriptData(data, onDisplayBind);
+			sprite.draw(script);
+			offestX += sprite.width;
+			parserScript(script);
+		}
 	}
 
 	public function parserScript(script:IScript):Void {

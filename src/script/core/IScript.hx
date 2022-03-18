@@ -120,4 +120,19 @@ interface IScript {
 	 * @param listener 
 	 */
 	public function removeListener(listener:IScriptEvent):Void;
+
+	/**
+	 * 定义变量值
+	 * @param name 
+	 * @param value 
+	 */
+	public function setParamValue(name:String, value:Dynamic):Void;
+
+	/**
+	 * 获取定义变量值
+	 * @param name 
+	 * @param defualt 
+	 * @return Dynamic
+	 */
+	public function getParamValue(name:String, defaultValue:Dynamic = null):Dynamic;
 }

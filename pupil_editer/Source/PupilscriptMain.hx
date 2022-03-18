@@ -67,4 +67,8 @@ class PupilscriptMain extends #if false LayoutGroup #else Application #end {
 	public function bindSaveData(save:Array<ScriptData>->Void):Void {
 		leftMenu.onSaveData = save;
 	}
+
+	public function getScriptStage():ScriptStage {
+		return scriptStage;
+	}
 }

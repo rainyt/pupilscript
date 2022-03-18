@@ -154,6 +154,8 @@ class Script implements IScript {
 				switch (d) {
 					case INPUT(key, width):
 						data.params.push(Reflect.getProperty(this, key));
+					case BOOL(key, text):
+						data.params.push(Reflect.getProperty(this, key));
 					default:
 				}
 			}
@@ -221,5 +223,34 @@ class Script implements IScript {
 	 */
 	public function removeListener(listener:IScriptEvent) {
 		_listeners.remove(listener);
+	}
+
+	/**
+	 * 定义变量值
+	 * @param name 
+	 * @param value 
+	 */
+	public function setParamValue(name:String, value:Dynamic):Void {
+		if (parent == null)
+			return;
+		if (Std.isOfType(this, Pupil)) {
+			cast(this, Pupil).setParamValue(name, value);
+		}
+		parent.setParamValue(name, value);
+	}
+
+	/**
+	 * 获取定义变量值
+	 * @param name 
+	 * @param defualt 
+	 * @return Dynamic
+	 */
+	public function getParamValue(name:String, defaultValue:Dynamic = null):Dynamic {
+		if (parent == null)
+			return defaultValue;
+		if (Std.isOfType(this, Pupil)) {
+			return cast(this, Pupil).getParamValue(name, defaultValue);
+		}
+		return parent.getParamValue(name, defaultValue);
 	}
 }

@@ -11,7 +11,15 @@ import script.core.Script;
  * 参考儿童编程，可以自定义组件，使组件按循序执行
  */
 class Pupil extends Script {
+	/**
+	 * 程序名称
+	 */
 	public var pupilName:String;
+
+	/**
+	 * 变量列表
+	 */
+	public var params:Map<String, Dynamic> = [];
 
 	public function new(pupilName:String = "main") {
 		super();
@@ -119,5 +127,25 @@ class Pupil extends Script {
 	public function toHScript():String {
 		var hscript = "";
 		return hscript;
+	}
+
+	/**
+	 * 设置变量定义
+	 * @param name 
+	 * @param value 
+	 */
+	override function setParamValue(name:String, value:Dynamic) {
+		params.set(name, value);
+	}
+
+	/**
+	 * 获取变量定义
+	 * @param name 
+	 * @param defaultValue 
+	 * @return Dynamic
+	 */
+	override function getParamValue(name:String, defaultValue:Dynamic = null):Dynamic {
+		var value = params.get(name);
+		return value == null ? defaultValue : value;
 	}
 }
