@@ -30,12 +30,12 @@ class Move extends Script {
 		this.name = "移动";
 		// 定义描述
 		this.desc = [
-			INPUT("time", 50),
+			INPUT("time", 50, NUMBER),
 			TEXT("秒内移动"),
 			TEXT("X轴"),
-			INPUT("x", 100),
+			INPUT("x", 100, NUMBER),
 			TEXT("Y轴"),
-			INPUT("y", 100)
+			INPUT("y", 100, NUMBER)
 		];
 		this.time = time;
 		this.x = x;

@@ -11,7 +11,7 @@ class Sleep extends Script {
 	public function new(time:Float = 0) {
 		super();
 		this.time = time;
-		this.desc = [TEXT("延迟"), INPUT("time", 50), TEXT("秒")];
+		this.desc = [TEXT("延迟"), INPUT("time", 50, NUMBER), TEXT("秒")];
 		this.needDisplay = false;
 		this.color = CONTROL_BLUE;
 	}

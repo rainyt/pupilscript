@@ -4,6 +4,7 @@ import script.core.ScriptData;
 import feathers.controls.LayoutGroup;
 import pupil.SetPoint;
 import script.core.Trace;
+import script.core.SetParam;
 import script.core.Aync;
 import script.core.Sleep;
 import editer.ActionMenu;
@@ -59,9 +60,13 @@ class PupilscriptMain extends #if false LayoutGroup #else Application #end {
 		leftMenu.addScript(new Trace());
 		leftMenu.addScript(new Pupil());
 		leftMenu.addScript(new Break());
-		leftMenu.addScript(new Move());
 		leftMenu.addScript(new Sleep());
+		leftMenu.addScript(new SetParam());
+		// OpenFL库
+		#if openfl
+		leftMenu.addScript(new Move());
 		leftMenu.addScript(new SetPoint());
+		#end
 	}
 
 	public function bindSaveData(save:Array<ScriptData>->Void):Void {

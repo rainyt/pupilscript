@@ -29,7 +29,7 @@ class Pupil extends Script {
 		this.color = EVENT_DARK_BLUE;
 		this.desc = [
 			TEXT("程序名称"),
-			INPUT("pupilName", 0),
+			INPUT("pupilName", 0, STRING),
 			DEBUG("运行", () -> {
 				if (isStart) {
 					this.stop();
@@ -135,6 +135,7 @@ class Pupil extends Script {
 	 * @param value 
 	 */
 	override function setParamValue(name:String, value:Dynamic) {
+		trace("set param", name, value);
 		params.set(name, value);
 	}
 

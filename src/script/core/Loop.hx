@@ -30,7 +30,7 @@ class Loop extends Script {
 		this.name = "循环执行";
 		this.color = CONTROL_BLUE;
 		this.supportChildScript = true;
-		this.desc = [TEXT("循环执行"), INPUT("loop", 50), TEXT("次")];
+		this.desc = [TEXT("循环执行"), INPUT("loop", 50, NUMBER), TEXT("次")];
 		this.needDisplay = false;
 	}
 

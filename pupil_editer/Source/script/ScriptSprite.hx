@@ -1,5 +1,7 @@
 package script;
 
+import script.core.Desc.ParamClass;
+import script.core.Script;
 import feathers.controls.Check;
 import feathers.text.TextFormat;
 import openfl.display.DisplayObject;
@@ -69,15 +71,26 @@ class ScriptSprite extends LayoutGroup {
 		}
 	}
 
-	private function bindTextInputChange(textInput:TextInput, key:String):Void {
+	private function bindTextInputChange(textInput:TextInput, key:String, type:ParamClass):Void {
 		textInput.addEventListener(Event.CHANGE, function(e) {
-			var data:Dynamic = Reflect.getProperty(script, key);
-			if (Std.isOfType(data, String))
-				Reflect.setProperty(script, key, textInput.text);
-			else
-				Reflect.setProperty(script, key, Std.parseFloat(textInput.text));
+			var setValue = textInput.text;
+			if (setValue.indexOf("${") != -1 && setValue.indexOf("}") != -1) {
+				// 覆盖绑定
+				setValue = StringTools.replace(setValue, "${", "");
+				setValue = StringTools.replace(setValue, "}", "");
+				cast(script, Script).paramsBind.set(key, setValue);
+			} else {
+				cast(script, Script).paramsBind.remove(key);
+				if (type == STRING)
+					Reflect.setProperty(script, key, setValue);
+				else
+					Reflect.setProperty(script, key, Std.parseFloat(setValue));
+			}
 		});
-		textInput.text = Std.string(Reflect.getProperty(script, key));
+		if (cast(script, Script).paramsBind.exists(key))
+			textInput.text = "${" + cast(script, Script).paramsBind.get(key) + "}";
+		else
+			textInput.text = Std.string(Reflect.getProperty(script, key));
 		inputs.set(key, textInput);
 	}
 
@@ -132,7 +145,7 @@ class ScriptSprite extends LayoutGroup {
 							var label = new Label(text);
 							layoutGroup.addChild(label);
 							label.textFormat = new TextFormat(null, 16, 0xffffff);
-						case INPUT(key, width):
+						case INPUT(key, width, type):
 							var input = new TextInput();
 							if (width != 0)
 								input.width = width;
@@ -140,7 +153,7 @@ class ScriptSprite extends LayoutGroup {
 								input.autoSizeWidth = true;
 							}
 							layoutGroup.addChild(input);
-							bindTextInputChange(input, key);
+							bindTextInputChange(input, key, type);
 						case DEBUG(text, cb):
 							var button = new Button(text);
 							layoutGroup.addChild(button);

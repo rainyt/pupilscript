@@ -9,7 +9,7 @@ class Trace extends Script {
 		this.name = "输出";
 		this.color = TRACE_VIOLET;
 		this.needDisplay = false;
-		this.desc = [TEXT("输出"), INPUT("msg", 0)];
+		this.desc = [TEXT("输出"), INPUT("msg", 0, STRING)];
 	}
 
 	override function onUpdate() {

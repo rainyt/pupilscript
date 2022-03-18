@@ -15,7 +15,13 @@ class SetPoint extends Script {
 		super();
 		this.x = x;
 		this.y = y;
-		this.desc = [TEXT("设置"), TEXT("X轴"), INPUT("x", 100), TEXT("Y轴"), INPUT("y", 100)];
+		this.desc = [
+			TEXT("设置"),
+			TEXT("X轴"),
+			INPUT("x", 100, NUMBER),
+			TEXT("Y轴"),
+			INPUT("y", 100, NUMBER)
+		];
 		this.color = MOTION_RED;
 		this.needDisplay = true;
 	}

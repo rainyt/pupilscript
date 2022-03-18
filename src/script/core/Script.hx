@@ -8,6 +8,11 @@ import haxe.Json;
  */
 class Script implements IScript {
 	/**
+	 * 参数绑定
+	 */
+	public var paramsBind:Map<String, String> = [];
+
+	/**
 	 * 构造一个脚本，一般来说，需要对Scirpt继续继承，然后自定义脚本实现
 	 */
 	public function new() {
@@ -53,6 +58,34 @@ class Script implements IScript {
 	 * @param display 
 	 */
 	public function reset(display:Any) {
+		// 参数绑定变更实现
+		if (this.desc != null)
+			for (d in this.desc) {
+				switch (d) {
+					case INPUT(key, width, type):
+						if (paramsBind.exists(key)) {
+							var newkey = paramsBind.get(key);
+							var newvalue = this.getParamValue(newkey);
+							trace("同步修改值变量", key, newvalue, newkey);
+							if (type == STRING) {
+								// 字符串
+								Reflect.setProperty(this, key, Std.string(newvalue));
+							} else {
+								// 数值
+								Reflect.setProperty(this, key, Std.parseFloat(newvalue));
+							}
+						}
+					case BOOL(key, text):
+						if (paramsBind.exists(key)) {
+							var newkey = paramsBind.get(key);
+							var newvalue = this.getParamValue(newkey);
+							if (newvalue != null) {
+								Reflect.setProperty(this, key, newvalue == "true");
+							}
+						}
+					default:
+				}
+			}
 		this.state = RuntimeCode.RUNING;
 		this.display = display;
 		for (event in _listeners) {
@@ -152,7 +185,7 @@ class Script implements IScript {
 		if (desc != null) {
 			for (d in desc) {
 				switch (d) {
-					case INPUT(key, width):
+					case INPUT(key, width, type):
 						data.params.push(Reflect.getProperty(this, key));
 					case BOOL(key, text):
 						data.params.push(Reflect.getProperty(this, key));

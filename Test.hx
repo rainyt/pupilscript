@@ -32,8 +32,6 @@ class Test {
 
 		var haxedata = HaxeScript.convertToHaxe(pupil.toScriptData());
 		trace("Haxe语法：", "\n" + haxedata + "\n\n\n");
-
-		
 	}
 }
 
@@ -49,7 +47,7 @@ class CustomScript extends Script {
 		super();
 		this.x = x;
 		this.y = y;
-		this.desc = [TEXT("X"), INPUT("x", 50), TEXT("Y"), INPUT("y", 50)];
+		this.desc = [TEXT("X"), INPUT("x", 50, NUMBER), TEXT("Y"), INPUT("y", 50, NUMBER)];
 	}
 
 	override function onUpdate() {
