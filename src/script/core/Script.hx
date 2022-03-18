@@ -176,11 +176,16 @@ class Script implements IScript {
 	 * @return String
 	 */
 	public function toScriptData():ScriptData {
+		var bindValue = {};
+		for (key => value in paramsBind) {
+			Reflect.setProperty(bindValue, key, value);
+		}
 		var data:ScriptData = {
 			display: this.display != null ? Reflect.getProperty(this.display, "name") : null,
 			className: Type.getClassName(Type.getClass(this)),
 			params: [],
-			scripts: []
+			scripts: [],
+			binds: bindValue
 		};
 		if (desc != null) {
 			for (d in desc) {
@@ -200,7 +205,14 @@ class Script implements IScript {
 	}
 
 	public static function recovery(data:ScriptData, onDisplayBind:ScriptData->Any):IScript {
-		var script:IScript = Type.createInstance(Type.resolveClass(data.className), data.params);
+		var script:Script = Type.createInstance(Type.resolveClass(data.className), data.params);
+		// 恢复binds
+		if (data.binds != null) {
+			var keys = Reflect.fields(data.binds);
+			for (key in keys) {
+				script.paramsBind.set(key, Reflect.getProperty(data.binds, key));
+			}
+		}
 		if (onDisplayBind != null) {
 			script.display = onDisplayBind(data);
 		}

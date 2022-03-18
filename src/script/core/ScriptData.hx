@@ -4,5 +4,6 @@ typedef ScriptData = {
 	?display:String,
 	className:String,
 	params:Array<Dynamic>,
-	scripts:Array<ScriptData>
+	scripts:Array<ScriptData>,
+	binds:Dynamic
 }

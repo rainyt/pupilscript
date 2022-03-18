@@ -20,6 +20,7 @@ class SetParam extends Script {
 			TEXT("值为"),
 			INPUT("value", 0, AUTO)
 		];
+		this.color = SET_GREED;
 	}
 
 	override function onUpdate() {

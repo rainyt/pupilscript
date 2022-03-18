@@ -39,11 +39,6 @@ class PupilscriptMain extends #if false LayoutGroup #else Application #end {
 	public function new() {
 		super();
 		current = this;
-		#if !pupilediter
-		this.backgroundSkin = new RectangleSkin(SolidColor(0x252525));
-		#else
-		this.backgroundSkin = null;
-		#end
 		this.layout = new AnchorLayout();
 		leftMenu = new ActionMenu();
 		this.addChild(leftMenu);
@@ -66,6 +61,17 @@ class PupilscriptMain extends #if false LayoutGroup #else Application #end {
 		#if openfl
 		leftMenu.addScript(new Move());
 		leftMenu.addScript(new SetPoint());
+		#end
+
+		#if !pupilediter
+		this.backgroundSkin = new RectangleSkin(SolidColor(0x252525));
+		bindSaveData(function(array) {
+			for (item in array) {
+				trace(item);
+			}
+		});
+		#else
+		this.backgroundSkin = null;
 		#end
 	}
 
