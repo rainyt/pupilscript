@@ -81,7 +81,9 @@ class ScriptSprite extends LayoutGroup {
 				cast(script, Script).paramsBind.set(key, setValue);
 			} else {
 				cast(script, Script).paramsBind.remove(key);
-				if (type == STRING)
+				if (type == AUTO) {
+					Reflect.setProperty(script, key, setValue);
+				} else if (type == STRING)
 					Reflect.setProperty(script, key, setValue);
 				else
 					Reflect.setProperty(script, key, Std.parseFloat(setValue));

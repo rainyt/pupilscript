@@ -204,6 +204,12 @@ class Script implements IScript {
 		return data;
 	}
 
+	/**
+	 * 恢复ScriptData数据为IScript
+	 * @param data 
+	 * @param onDisplayBind 
+	 * @return IScript
+	 */
 	public static function recovery(data:ScriptData, onDisplayBind:ScriptData->Any):IScript {
 		var script:Script = Type.createInstance(Type.resolveClass(data.className), data.params);
 		// 恢复binds

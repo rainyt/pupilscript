@@ -10,7 +10,7 @@ enum abstract Color(UInt) {
 	// 红色，动画分类
 	var MOTION_RED = 0xec706c;
 	// 绿色，设置分类
-	var SET_GREED = 0x63c6a9;
+	var SET_GREED = 0x039789;
 	// 紫色，输出分类
 	var TRACE_VIOLET = 0x9975f7;
 }
