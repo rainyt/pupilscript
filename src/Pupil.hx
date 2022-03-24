@@ -83,6 +83,8 @@ class Pupil extends Script {
 				f.stop();
 				_stop = false;
 				_start = false;
+				onExit(code);
+				exit(code);
 			}
 		});
 		#else
@@ -99,15 +101,16 @@ class Pupil extends Script {
 
 	private function _delayCall():Void {
 		Timer.delay(function() {
-			var exit = Runtime.run(this);
-			if (!_stop && exit == RuntimeCode.RUNING) {
+			var exitcode = Runtime.run(this);
+			if (!_stop && exitcode == RuntimeCode.RUNING) {
 				_delayCall();
 			} else {
-				if (exit == RuntimeCode.LOOP_EXIT)
-					exit = RuntimeCode.EXIT;
-				onExit(exit);
+				if (exitcode == RuntimeCode.LOOP_EXIT)
+					exitcode = RuntimeCode.EXIT;
+				onExit(exitcode);
 				_stop = false;
 				_start = false;
+				exit(exitcode);
 			}
 		}, 16);
 	}

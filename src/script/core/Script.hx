@@ -100,6 +100,7 @@ class Script implements IScript {
 	public function exit(code:RuntimeCode = RuntimeCode.EXIT):Void {
 		this.scriptIndex = -1;
 		state = code;
+		trace("exit?");
 		for (event in _listeners) {
 			event.onExit(state);
 		}
