@@ -66,7 +66,6 @@ class Script implements IScript {
 						if (paramsBind.exists(key)) {
 							var newkey = paramsBind.get(key);
 							var newvalue = this.getParamValue(newkey);
-							trace("同步修改值变量", key, newvalue, newkey);
 							if (type == STRING) {
 								// 字符串
 								Reflect.setProperty(this, key, Std.string(newvalue));
@@ -100,7 +99,6 @@ class Script implements IScript {
 	public function exit(code:RuntimeCode = RuntimeCode.EXIT):Void {
 		this.scriptIndex = -1;
 		state = code;
-		trace("exit?");
 		for (event in _listeners) {
 			event.onExit(state);
 		}
