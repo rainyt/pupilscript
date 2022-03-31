@@ -72,8 +72,9 @@ class Pupil extends Script {
 	public function start():Void {
 		if (this.scripts.length == 0 || _start)
 			return;
-		this.resetScriptIndex(this);
+		Runtime.resetScripts(this);
 		_start = true;
+		_stop = false;
 		#if zygame
 		FrameEngine.create(function(f) {
 			var code = Runtime.run(this);
@@ -90,13 +91,6 @@ class Pupil extends Script {
 		#else
 		_delayCall();
 		#end
-	}
-
-	public function resetScriptIndex(script:IScript):Void {
-		script.scriptIndex = -1;
-		for (s in script.scripts) {
-			resetScriptIndex(s);
-		}
 	}
 
 	private function _delayCall():Void {

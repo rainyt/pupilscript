@@ -2,17 +2,23 @@ package script.core;
 
 class Runtime {
 	/**
+	 * 重置脚本
+	 * @param script 
+	 */
+	public static function resetScripts(script:IScript):Void {
+		script.scriptIndex = -1;
+		script.state = RUNING;
+		for (script in script.scripts) {
+			resetScripts(script);
+		}
+	}
+
+	/**
 	 * 运行脚本
 	 * @param script 
 	 * @return Int 退出码
 	 */
-	public static function run(script:IScript, resetScript:Bool = true):RuntimeCode {
-		// 开始循序执行script
-		if (resetScript) {
-			if (script.scriptIndex >= script.scripts.length) {
-				script.scriptIndex = -1;
-			}
-		}
+	public static function run(script:IScript):RuntimeCode {
 		if (script.scriptIndex == -1) {
 			script.scriptIndex = 0;
 			if (script.scripts[0] != null)
@@ -28,7 +34,7 @@ class Runtime {
 				if (runScript != null) {
 					runScript.reset(runScript.display);
 				}
-				return run(script, false);
+				return run(script);
 			} else {
 				return runScript.state;
 			}
