@@ -77,20 +77,29 @@ class Pupil extends Script {
 		_stop = false;
 		#if zygame
 		FrameEngine.create(function(f) {
-			var code = Runtime.run(this);
-			if (code == RuntimeCode.LOOP_EXIT)
-				code = RuntimeCode.EXIT;
-			if (_stop || code == RuntimeCode.EXIT) {
+			if (!_stop) {
+				var code = Runtime.run(this);
+				if (code == RuntimeCode.LOOP_EXIT)
+					code = RuntimeCode.EXIT;
+				if (code == RuntimeCode.EXIT) {
+					f.stop();
+					exitPupil(code);
+				}
+			} else {
 				f.stop();
-				_stop = false;
-				_start = false;
-				onExit(code);
-				exit(code);
+				exitPupil(RuntimeCode.EXIT);
 			}
 		});
 		#else
 		_delayCall();
 		#end
+	}
+
+	private function exitPupil(code:RuntimeCode):Void {
+		_stop = false;
+		_start = false;
+		onExit(code);
+		exit(code);
 	}
 
 	private function _delayCall():Void {
@@ -101,10 +110,7 @@ class Pupil extends Script {
 			} else {
 				if (exitcode == RuntimeCode.LOOP_EXIT)
 					exitcode = RuntimeCode.EXIT;
-				onExit(exitcode);
-				_stop = false;
-				_start = false;
-				exit(exitcode);
+				exitPupil(exitcode);
 			}
 		}, 16);
 	}
