@@ -40,8 +40,10 @@ class Loop extends Script {
 		if (code == RuntimeCode.EXIT || code == RuntimeCode.BREAK) {
 			this.exit();
 		} else if (code == RuntimeCode.LOOP_EXIT) {
-			if (_loop > 0)
+			this.scriptIndex = -1;
+			if (_loop > 0){
 				_loop--;
+			}
 			if (_loop == 0)
 				this.exit();
 			else

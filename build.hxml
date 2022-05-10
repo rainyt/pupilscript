@@ -1,4 +1,4 @@
---main Test
+--main LoopTest
 --class-path src
 --class-path Test
 --class-path openfl_lib
