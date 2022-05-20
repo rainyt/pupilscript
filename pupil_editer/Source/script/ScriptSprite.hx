@@ -1,5 +1,7 @@
 package script;
 
+import game.world.World;
+import game.world.IDisplay;
 import script.core.Desc.ParamClass;
 import script.core.Script;
 import feathers.controls.Check;
@@ -117,10 +119,17 @@ class ScriptSprite extends LayoutGroup {
 		}
 	}
 
-	private function bindPopUpListView(drop:PopUpListView):Void {
-		drop.itemToText = (data:DisplayObject) -> data.name;
+	private function bindPopUpListView(drop:TextInput):Void {
+		// drop.itemToText = (data:DisplayObject) -> data.name;
 		drop.addEventListener(Event.CHANGE, function(e) {
-			script.display = drop.selectedItem;
+			script.display = null;
+			for (display in World.currentWorld.displays) {
+				if (display.name == drop.text || (display.displayData != null && display.displayData.assets == drop.text)) {
+					script.display = display;
+					break;
+				}
+			};
+			trace("发生变化", script.display);
 		});
 	}
 
@@ -135,8 +144,9 @@ class ScriptSprite extends LayoutGroup {
 
 		if (layoutGroup.numChildren == 0) {
 			if (script.needDisplay) {
-				var drop = new PopUpListView(PupilscriptMain.scriptStage.array);
-				drop.selectedItem = script.display;
+				var drop = new TextInput(script.display != null ? cast(script.display, IDisplay).name : "");
+				// var drop = new PopUpListView(PupilscriptMain.scriptStage.array);
+				// drop.selectedItem = script.display;
 				layoutGroup.addChild(drop);
 				bindPopUpListView(drop);
 			}

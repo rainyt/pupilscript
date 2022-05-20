@@ -30,7 +30,7 @@ class ScriptStage extends LayoutGroup {
 	 */
 	public var scripts:Array<IScript> = [];
 
-	public var array:ArrayCollection<DisplayObject> = new ArrayCollection();
+	// public var array:ArrayCollection<DisplayObject> = new ArrayCollection();
 
 	public function new() {
 		super();
@@ -58,8 +58,8 @@ class ScriptStage extends LayoutGroup {
 			quad.name = "quad";
 			quad2.name = "quad2";
 
-			array.add(quad);
-			array.add(quad2);
+			// array.add(quad);
+			// array.add(quad2);
 
 			var pupil = new Pupil();
 			pupil.addScript(new SetPoint(200, 200), quad);

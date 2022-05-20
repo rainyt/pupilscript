@@ -179,8 +179,9 @@ class Script implements IScript {
 		for (key => value in paramsBind) {
 			Reflect.setProperty(bindValue, key, value);
 		}
+		var pname = this.display != null ? Reflect.getProperty(this.display, "name") : null;
 		var data:ScriptData = {
-			display: this.display != null ? Reflect.getProperty(this.display, "name") : null,
+			display: pname,
 			className: Type.getClassName(Type.getClass(this)),
 			params: [],
 			scripts: [],
