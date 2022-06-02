@@ -98,10 +98,11 @@ class Pupil extends Script {
 	}
 
 	private function exitPupil(code:RuntimeCode):Void {
+		onExit(!_stop ? code : STOP_EXIT);
+		if (!_stop)
+			exit(code);
 		_stop = false;
 		_start = false;
-		onExit(code);
-		exit(code);
 	}
 
 	private function _delayCall():Void {

@@ -5,4 +5,5 @@ enum abstract RuntimeCode(Int) to Int {
 	var EXIT = 0;
 	var LOOP_EXIT = 1;
 	var BREAK = 2;
+	var STOP_EXIT = 3;
 }
