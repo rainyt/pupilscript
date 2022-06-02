@@ -68,11 +68,13 @@ class Pupil extends Script {
 
 	/**
 	 * 开始执行
+	 * @param resume 是否恢复脚本，如果为true，则不会重置程序，会继续执行
 	 */
-	public function start():Void {
+	public function start(resume:Bool = false):Void {
 		if (this.scripts.length == 0 || _start)
 			return;
-		Runtime.resetScripts(this);
+		if (!resume)
+			Runtime.resetScripts(this);
 		_start = true;
 		_stop = false;
 		#if zygame
