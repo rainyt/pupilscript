@@ -1,5 +1,7 @@
 package editer;
 
+import feathers.layout.VerticalLayout;
+import feathers.controls.VScrollBar;
 import openfl.events.MouseEvent;
 import openfl.events.FocusEvent;
 import feathers.skins.RectangleSkin;
@@ -20,6 +22,7 @@ class ActionListView extends ListView {
 			target.mouseChildren = false;
 			target.draw(iscript);
 		});
+		this.layout = new VerticalLayout();
 		this.backgroundSkin = new RectangleSkin(SolidColor(0x1e1e1e));
 		this.addEventListener(FocusEvent.FOCUS_OUT, function(e) {
 			this.visible = false;
@@ -29,5 +32,8 @@ class ActionListView extends ListView {
 				this.visible = false;
 			}
 		});
+		this.scrollBarYFactory = () -> {
+			return new VScrollBar();
+		}
 	}
 }
